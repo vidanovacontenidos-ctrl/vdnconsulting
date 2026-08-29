@@ -1,26 +1,31 @@
-VIDEO DEL HERO
+FONDO DEL HERO
 ==============
-El sitio busca:  assets/video/hero.mp4
-Y como imagen previa: assets/video/hero-poster.jpg
+Ya no hace falta ningún video. El hero usa una red animada dibujada
+por código: nodos, enlaces y pulsos de datos recorriéndolos.
 
-Si ninguno de los dos existe, el hero muestra un fondo degradado
-oscuro que se ve bien igual. No se rompe nada.
+Está en assets/app.js, al final, en el bloque
+"Fondo animado del hero: topología de red con pulsos".
 
-REQUISITOS
-- MP4, códec H.264, sin audio (el video va en mute)
-- 1920x1080 o 2560x1440, entre 8 y 15 segundos, en loop limpio
-- Menos de 4 MB. Comprimir con Handbrake o ffmpeg:
-    ffmpeg -i original.mp4 -an -vf scale=1920:-2 -c:v libx264 \
-           -crf 30 -preset slow -movflags +faststart hero.mp4
-- Poster: primer fotograma exportado a JPG, ancho 1920, calidad 70
+QUÉ PODÉS AJUSTAR (arriba de ese bloque)
+  INK        color de enlaces y nodos, en formato "R,G,B"
+  PULSE      color del pulso principal
+  PULSE_ALT  color del pulso de acento
+  Densidad:  w*h/42000 -> número más chico = más nodos
+  Velocidad: 0.0035 + Math.random()*0.004
+  Frecuencia de pulsos: Math.random() < 0.045
 
-QUÉ FILMAR O GENERAR
-Movimiento lento y continuo, sin cortes. Sirve muy bien:
-- Recorrido lateral lento frente a un rack con luces de estado
-- Primer plano de fibra o patchcords con foco desplazándose
-- Plano cenital de una oficina en movimiento, cámara rápida
-Evitar: caras reconocibles, logos de marcas, texto en pantalla,
-cortes bruscos (rompen el loop).
+DETALLES
+- Se pausa sola cuando el hero sale de pantalla, así no gasta batería
+- Respeta prefers-reduced-motion: dibuja un cuadro fijo, sin movimiento
+- Se redibuja al cambiar el tamaño de la ventana
+- Pesa unos 3 KB, contra los 4 MB que pesaría un video
 
-NO uses el video de la especificación original: está alojado en la
-cuenta de otra persona y puede desaparecer sin aviso.
+SI IGUAL QUERÉS PONER UN VIDEO
+Agregá dentro de <header class="vhero"> y antes del canvas:
+
+  <video autoplay loop muted playsinline
+         poster="../assets/video/hero-poster.jpg">
+    <source src="../assets/video/hero.mp4" type="video/mp4">
+  </video>
+
+Y en styles.css subile el z-index a 2 para que tape el lienzo.

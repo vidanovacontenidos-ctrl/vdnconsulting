@@ -7,7 +7,7 @@
 <meta name="description" content="Un solo equipo a cargo de tu red, tus servidores, tu nube y tus puestos de trabajo. Monitoreo 24/7, respuesta con SLA y precio por puesto. AMBA y Zona Oeste.">
 <meta property="og:title" content="VDN Consulting — Infraestructura IT gestionada">
 <meta property="og:description" content="Tu empresa no necesita cinco proveedores. Necesita que nada se caiga.">
-<meta property="og:image" content="../assets/img/og.jpg">
+<meta property="og:image" content="../assets/img/marca/og.jpg">
 <link rel="alternate" hreflang="es" href="https://vdnconsulting.com/es/index.html">
 <link rel="alternate" hreflang="en" href="https://vdnconsulting.com/en/index.html">
 <link rel="alternate" hreflang="x-default" href="https://vdnconsulting.com/en/index.html">
@@ -29,7 +29,8 @@
       <a href="conectar.html">Conectar</a>
       <a href="automatizar.html">Automatizar</a>
       <a href="construir.html">Construir</a>
-      <a href="transmitir.html">Transmitir</a>
+      <a href="disenar.html">Diseñar</a>
+      <a href="church-it.html">Church IT</a>
     </div>
     <div class="lang"><a href="../en/index.html">EN</a><a href="#" class="on">ES</a></div>
     <a href="#diagnostico" class="btn btn-primary btn-sm">Diagnóstico gratis</a>
@@ -37,10 +38,8 @@
 </nav>
 
 <header class="vhero" id="top">
-  <video autoplay loop muted playsinline poster="../assets/video/hero-poster.jpg" aria-hidden="true">
-    <source src="../assets/video/hero.mp4" type="video/mp4">
-  </video>
   <div class="vhero-fallback" aria-hidden="true"></div>
+  <canvas class="vhero-net" aria-hidden="true"></canvas>
 
   <div class="vhero-inner">
     <div class="vhero-grid">
@@ -90,7 +89,7 @@
 </section>
 
 
-<section id="servicios">
+<section id="servicios" class="art" style="--art:url(../assets/img/fondos/red-malla.jpg);--art-op:.55;--art-pos:50% 40%">
   <div class="wrap">
     <div class="rack-head">
       <div>
@@ -125,9 +124,9 @@
           <p class="unit-desc">Sitios, tiendas y sistemas a medida. Los hacemos nosotros y después los mantenemos nosotros.</p>
           <div class="unit-more">Ver unidad</div>
         </a>
-        <a class="unit" href="transmitir.html">
-          <div class="unit-name"><span>Producción en vivo</span><h3>Transmitir</h3></div>
-          <p class="unit-desc">Producción del domingo, seguimiento de visitantes y soporte en el horario en que una iglesia realmente lo necesita.</p>
+        <a class="unit" href="disenar.html">
+          <div class="unit-name"><span>Marca y presencia</span><h3>Diseñar</h3></div>
+          <p class="unit-desc">Marca, identidad visual y la presencia digital construida sobre esa base. Más el trabajo de mejora y automatización que la sostiene.</p>
           <div class="unit-more">Ver unidad</div>
         </a>
       </div>
@@ -135,7 +134,7 @@
   </div>
 </section>
 
-<section class="band" id="precio">
+<section class="art band" id="precio" style="--art:url(../assets/img/fondos/cubos-vidrio.jpg);--art-op:.4;--art-pos:85% 50%">
   <div class="wrap">
     <p class="eyebrow">Cómo se contrata</p>
     <h2 style="margin-top:18px">Un plan por nivel de exigencia, no por paquete cerrado.</h2>
@@ -181,36 +180,45 @@
   </div>
 </section>
 
-<section id="casos">
+<section id="casos" class="art" style="--art:url(../assets/img/fondos/mapa.jpg);--art-op:.35;--art-pos:50% 30%">
   <div class="wrap">
-    <p class="eyebrow">Resultados medidos</p>
-    <h2 style="margin-top:18px">Números, no adjetivos.</h2>
+    <p class="eyebrow">Casos</p>
+    <h2 style="margin-top:18px">Antes y después.</h2>
+    <p class="lede">Sin porcentajes inventados. Qué pasaba, qué pasa hoy.</p>
 
     <div class="cases">
       <article class="case">
-        <figure class="ratio-wide"><img src="../assets/img/07-deposito.jpg" alt="Depósito con estanterías metálicas y operario escaneando"></figure>
+        <figure class="ratio-wide"><img src="../assets/img/home/07-deposito.jpg" alt="Depósito con estanterías y un operario al fondo"></figure>
         <div class="case-in">
           <div class="case-who">Distribuidora · 3 depósitos</div>
-          <div class="case-num">14 h</div>
-          <p>Semanales que el equipo administrativo dejó de gastar cargando pedidos a mano después de conectar el sistema de gestión con la tienda.</p>
+          <div class="case-ba">
+            <div class="b"><span>Antes</span><p>Cada pedido se cargaba a mano, dos veces.</p></div>
+            <div class="a"><span>Ahora</span><p>Entra solo, validado, con stock sincronizado.</p></div>
+          </div>
           <div class="case-meta">U3 Automatizar · 7 semanas</div>
         </div>
       </article>
+
       <article class="case">
-        <figure class="ratio-wide"><img src="../assets/img/08-estudio.jpg" alt="Oficina de estudio contable vacía en la primera hora de la mañana"></figure>
+        <figure class="ratio-wide"><img src="../assets/img/home/08-estudio.jpg" alt="Oficina de estudio contable a primera hora"></figure>
         <div class="case-in">
           <div class="case-who">Estudio contable · 40 puestos</div>
-          <div class="case-num">0</div>
-          <p>Cortes de servicio en 11 meses. Antes perdían entre dos y tres jornadas por trimestre entre caídas de red y correo.</p>
+          <div class="case-ba">
+            <div class="b"><span>Antes</span><p>Un disco externo y la esperanza de que anduviera.</p></div>
+            <div class="a"><span>Ahora</span><p>Copia verificada cada noche y restauración probada.</p></div>
+          </div>
           <div class="case-meta">U1 Sostener + U2 Conectar · en curso</div>
         </div>
       </article>
+
       <article class="case">
-        <figure class="ratio-wide"><img src="../assets/img/09-diagnostico.jpg" alt="Dos personas relevando un rack desordenado"></figure>
+        <figure class="ratio-wide"><img src="../assets/img/fondos/fibra.jpg" alt="Representación abstracta de una red de fibra"></figure>
         <div class="case-in">
           <div class="case-who">Planta metalúrgica · 2 turnos</div>
-          <div class="case-num">−31%</div>
-          <p>De gasto mensual en IT tras auditar licencias duplicadas, apagar servidores ociosos y renegociar el enlace.</p>
+          <div class="case-ba">
+            <div class="b"><span>Antes</span><p>Licencias duplicadas y servidores que nadie usaba.</p></div>
+            <div class="a"><span>Ahora</span><p>Se apagó lo que sobraba antes de comprar nada.</p></div>
+          </div>
           <div class="case-meta">Diagnóstico + U1 · 4 meses</div>
         </div>
       </article>
@@ -218,7 +226,7 @@
   </div>
 </section>
 
-<section class="band">
+<section class="art band" style="--art:url(../assets/img/fondos/ola.jpg);--art-op:.5;--art-pos:50% 70%">
   <div class="wrap">
     <p class="eyebrow">Cómo arranca</p>
     <h2 style="margin-top:18px">De la primera charla a estar cubiertos: cuatro semanas.</h2>
@@ -246,7 +254,7 @@
   </div>
 </section>
 
-<section class="band" id="diagnostico">
+<section class="art band" id="diagnostico" style="--art:url(../assets/img/fondos/escudo.jpg);--art-op:.42;--art-pos:80% 50%">
   <div class="wrap cta-grid">
     <div>
       <p class="eyebrow">Diagnóstico sin cargo</p>
@@ -271,7 +279,7 @@
         </div>
         <div class="two">
           <div class="field"><label for="f5">Puestos</label><select id="f5"><option>5 a 15</option><option selected>16 a 40</option><option>41 a 80</option><option>Más de 80</option></select></div>
-          <div class="field"><label for="f6">Qué te urge</label><select id="f6"><option>Soporte y nube</option><option>Red, rack o cámaras</option><option>Automatizar procesos</option><option>Sitio o tienda</option><option>Todavía no sé</option></select></div>
+          <div class="field"><label for="f6">Qué te urge</label><select id="f6"><option>Soporte y nube</option><option>Red, rack o cámaras</option><option>Automatizar procesos</option><option>Sitio, marca o identidad</option><option>Todavía no sé</option></select></div>
         </div>
         <div class="field"><label for="f7">Qué está pasando</label><textarea id="f7" placeholder="Se cae el wifi en el depósito, nadie sabe si el backup anda, el que nos atendía se fue..."></textarea></div>
         <button type="submit" class="btn btn-primary">Reservar el diagnóstico</button>
@@ -289,8 +297,8 @@
         <a href="index.html" class="brand" style="margin-bottom:8px"><svg class="mk" viewBox="0 0 30 30" width="22" height="22" aria-hidden="true" fill="none" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path class="s1" d="M4 8 L10.5 24 L15 13"/><path class="s2" d="M14.6 14.6 L18.5 5"/></svg>VDN Consulting</a>
         <span>Infraestructura IT gestionada para empresas que no pueden permitirse estar caídas.</span>
       </div>
-      <div class="foot-col"><b>Unidades</b><a href="sostener.html">U1 Sostener</a><a href="conectar.html">U2 Conectar</a><a href="automatizar.html">U3 Automatizar</a><a href="construir.html">U4 Construir</a><a href="transmitir.html">U5 Transmitir</a></div>
-      <div class="foot-col"><b>Empresa</b><a href="#casos">Resultados</a><a href="#precio">Precio</a><a href="#diagnostico">Diagnóstico</a></div>
+      <div class="foot-col"><b>Unidades</b><a href="sostener.html">U1 Sostener</a><a href="conectar.html">U2 Conectar</a><a href="automatizar.html">U3 Automatizar</a><a href="construir.html">U4 Construir</a><a href="disenar.html">U5 Diseñar</a><a href="church-it.html">Church IT</a></div>
+      <div class="foot-col"><b>Empresa</b><a href="#casos">Resultados</a><a href="#precio">Precio</a><a href="#diagnostico">Diagnóstico</a><a href="#" data-promo>Ver promo de sitios web</a></div>
       <div class="foot-col"><b>Contacto</b><a href="mailto:hola@vdnconsulting.com">hola@vdnconsulting.com</a><a href="tel:+5491100000000">+54 9 11 0000-0000</a><span>Hurlingham, Buenos Aires</span></div>
     </div>
     <div class="foot-base"><span>© 2026 VDN Consulting</span><span>Guardia activa · Lunes a domingo</span></div>
@@ -300,5 +308,7 @@
 
 
 <script src="../assets/app.js"></script>
+<script src="../assets/motion.js"></script>
+<script src="../assets/promo.js"></script>
 </body>
 </html>

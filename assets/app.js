@@ -126,12 +126,16 @@
   if (h1 && h1.dataset.text) {
     var lines = h1.dataset.text.split('|');
     var n = 0;
-    h1.innerHTML = lines.map(function (line, li) {
-      return '<span class="ln">' + line.split('').map(function (c) {
-        var d = reduce ? 0 : n++ * CHAR;
-        var ch = c === ' ' ? '\u00A0' : c;
-        return '<span class="ch" style="transition-delay:' + d + 'ms">' + ch + '</span>';
-      }).join('') + '</span>';
+    h1.innerHTML = lines.map(function (line) {
+      var words = line.split(' ').map(function (word) {
+        var chars = word.split('').map(function (c) {
+          var d = reduce ? 0 : n++ * CHAR;
+          return '<span class="ch" style="transition-delay:' + d + 'ms">' + c + '</span>';
+        }).join('');
+        return '<span class="wd">' + chars + '</span>';
+      });
+      n++;
+      return '<span class="ln">' + words.join(' ') + '</span>';
     }).join('');
     h1.setAttribute('aria-label', lines.join(' '));
   }
@@ -160,4 +164,110 @@
     requestAnimationFrame(function () { sync(); tick = false; });
   }, { passive: true });
   window.addEventListener('resize', sync);
+})();
+
+/* ---- Fondo animado del hero: topología de red con pulsos ---- */
+(function () {
+  'use strict';
+  var cv = document.querySelector('.vhero-net');
+  if (!cv) return;
+
+  var ctx = cv.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var INK = '233,235,255';      // trazo de los enlaces
+  var PULSE = '#8F87FF';        // pulso principal
+  var PULSE_ALT = '#5FD3CD';    // pulso de acento
+  var nodes = [], links = [], pulses = [], w = 0, h = 0, dpr = 1, raf = null;
+
+  function build() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = cv.clientWidth; h = cv.clientHeight;
+    cv.width = w * dpr; cv.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    var n = Math.max(14, Math.min(34, Math.round(w * h / 42000)));
+    nodes = [];
+    for (var i = 0; i < n; i++) {
+      nodes.push({
+        x: Math.random() * w, y: Math.random() * h,
+        vx: (Math.random() - .5) * .16, vy: (Math.random() - .5) * .16,
+        r: Math.random() * 1.4 + 1
+      });
+    }
+    var reach = Math.min(w, h) * 0.34;
+    links = [];
+    for (var a = 0; a < nodes.length; a++)
+      for (var b = a + 1; b < nodes.length; b++) {
+        var dx = nodes[a].x - nodes[b].x, dy = nodes[a].y - nodes[b].y;
+        if (Math.sqrt(dx * dx + dy * dy) < reach) links.push([a, b]);
+      }
+    pulses = [];
+  }
+
+  function spawn() {
+    if (!links.length || pulses.length > 7) return;
+    var l = links[Math.floor(Math.random() * links.length)];
+    pulses.push({ a: l[0], b: l[1], t: 0, sp: 0.0035 + Math.random() * 0.004,
+                  c: Math.random() < 0.22 ? PULSE_ALT : PULSE });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+
+    ctx.lineWidth = 1;
+    for (var i = 0; i < links.length; i++) {
+      var A = nodes[links[i][0]], B = nodes[links[i][1]];
+      var dx = A.x - B.x, dy = A.y - B.y;
+      var d = Math.sqrt(dx * dx + dy * dy);
+      var reach = Math.min(w, h) * 0.34;
+      ctx.strokeStyle = 'rgba(' + INK + ',' + (0.13 * (1 - d / reach)).toFixed(3) + ')';
+      ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(B.x, B.y); ctx.stroke();
+    }
+
+    ctx.fillStyle = 'rgba(' + INK + ',0.30)';
+    for (var j = 0; j < nodes.length; j++) {
+      ctx.beginPath(); ctx.arc(nodes[j].x, nodes[j].y, nodes[j].r, 0, 6.284); ctx.fill();
+    }
+
+    for (var k = pulses.length - 1; k >= 0; k--) {
+      var p = pulses[k], N1 = nodes[p.a], N2 = nodes[p.b];
+      var x = N1.x + (N2.x - N1.x) * p.t, y = N1.y + (N2.y - N1.y) * p.t;
+      var fade = Math.sin(p.t * Math.PI);
+      ctx.globalAlpha = fade * 0.85;
+      ctx.fillStyle = p.c;
+      ctx.beginPath(); ctx.arc(x, y, 2.4, 0, 6.284); ctx.fill();
+      ctx.globalAlpha = fade * 0.22;
+      ctx.beginPath(); ctx.arc(x, y, 7, 0, 6.284); ctx.fill();
+      ctx.globalAlpha = 1;
+      p.t += p.sp;
+      if (p.t >= 1) pulses.splice(k, 1);
+    }
+  }
+
+  function step() {
+    for (var i = 0; i < nodes.length; i++) {
+      var nd = nodes[i];
+      nd.x += nd.vx; nd.y += nd.vy;
+      if (nd.x < 0 || nd.x > w) nd.vx *= -1;
+      if (nd.y < 0 || nd.y > h) nd.vy *= -1;
+    }
+    if (Math.random() < 0.045) spawn();
+    draw();
+    raf = requestAnimationFrame(step);
+  }
+
+  build();
+  if (reduce) { draw(); }
+  else {
+    step();
+    new IntersectionObserver(function (e) {
+      if (e[0].isIntersecting) { if (!raf) raf = requestAnimationFrame(step); }
+      else if (raf) { cancelAnimationFrame(raf); raf = null; }
+    }).observe(cv);
+  }
+
+  var t = null;
+  window.addEventListener('resize', function () {
+    clearTimeout(t); t = setTimeout(function () { build(); if (reduce) draw(); }, 180);
+  });
 })();

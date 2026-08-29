@@ -1,24 +1,53 @@
-IMÁGENES — inventario y estado
-==============================
-Medidas contra los umbrales del diseño: luminancia >0,55 ·
-saturación <0,30 · menos de 8% de píxeles casi negros.
+IMÁGENES — organización por carpetas
+====================================
 
-  01-rack.jpg           16:9  Home              PASA
-  02-mesa-ayuda.jpg      4:5  U1                PASA (justo en negros)
-  03-patchera.jpg        4:5  U2                PASA (justo en negros)
-  04-cctv.jpg           16:9  U2 cierre         PASA
-  05-carga-manual.jpg    4:5  U3                PASA
-  06-desarrollo.jpg      4:5  U4                PASA
-  07-deposito.jpg       16:9  Home, caso 1      PASA
-  08-estudio.jpg        16:9  Home, caso 2      PASA
-  09-diagnostico.jpg    16:9  Home, caso 3      REGENERAR — muy oscura
-  11-cabina.jpg          4:5  U5                PASA
-  12-sala-culto.jpg     16:9  U5                PASA
-  13-hall.jpg           16:9  U5                PASA
-  og.jpg           1200x630  Vista previa       PASA
+home/           fotografías de la portada
+  01-rack.jpg              16:9   bloque bajo la franja de tecnologías
+  07-deposito.jpg          16:9   caso distribuidora
+  08-estudio.jpg           16:9   caso estudio contable
+  09-diagnostico.jpg       16:9   caso planta  ← REGENERAR, muy oscura
 
-TODAS SON RECORTES DE UN COLLAGE DE 1536x1024.
-Rondan los 250-450 px de ancho y en pantalla se van a ver blandas.
-Regeneralas de a una, a resolución completa, con el mismo prompt.
+unidades/       fotografías de las páginas U1 a U5
+  02-mesa-ayuda.jpg         4:5   U1 Sostener
+  03-patchera.jpg           4:5   U2 Conectar
+  04-cctv.jpg              16:9   U2, disponible sin usar
+  05-carga-manual.jpg       4:5   U3 Automatizar
+  06-desarrollo.jpg         4:5   U4 Construir
+  11-cabina.jpg             4:5   U5 Transmitir
+  12-sala-culto.jpg        16:9   U5 Transmitir
+  13-hall.jpg              16:9   U5 Transmitir
 
-Al reemplazarlas: mismo nombre de archivo, nada más que hacer.
+fondos/         arte abstracto que se disuelve detrás de las secciones
+  red-malla.jpg      home, sección de unidades
+  cubos-vidrio.jpg   home, sección de planes
+  ola.jpg            home, sección de proceso
+  escudo.jpg         home, llamada final
+  mapa.jpg           home, sección de casos
+  nube.jpg           U1 Sostener
+  fibra.jpg          U2 Conectar
+  cubo-datos.jpg     U3 Automatizar
+  pantallas.jpg      U4 Construir
+  anillo.jpg         U5 Transmitir
+  globo.jpg          U5, bloque bilingüe
+  paneles.jpg        sin asignar
+  escudo-v.jpg       sin asignar
+
+marca/
+  og.jpg           1200x630, vista previa al compartir en redes
+
+CÓMO AGREGAR UN FONDO A UNA SECCIÓN
+Se ponen dos cosas en la etiqueta <section>:
+
+  <section class="art" style="--art:url(../assets/img/fondos/ola.jpg);
+                              --art-op:.5;
+                              --art-pos:50% 70%">
+
+  --art-op   opacidad, entre .3 y .6 según cuánto texto tenga encima
+  --art-pos  dónde queda el centro de la imagen y de la máscara
+
+La máscara radial hace que se disuelva en el fondo de la página, sin
+borde ni recuadro. En celular la opacidad baja al 60% sola.
+
+TODOS LOS FONDOS ESTÁN ENFRIADOS hacia el índigo de la marca. Los
+originales venían con tinte dorado, que es el complementario del
+índigo y le peleaba en cada sección.
