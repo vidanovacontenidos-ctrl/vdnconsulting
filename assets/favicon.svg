@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+<title>VDN</title>
+<rect width="40" height="40" rx="9" fill="#4A40D0"/>
+<g fill="none" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+<path d="M10 12 L17.5 32 L23 17.5" stroke="#FFFFFF"/>
+<path d="M22.4 19.5 L27 7.5" stroke="#5FD3CD"/>
+</g>
+</svg>

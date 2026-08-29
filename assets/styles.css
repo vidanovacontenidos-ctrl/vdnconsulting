@@ -481,3 +481,10 @@ nav,nav .nav-in,nav .brand,nav .nav-links a{transition:background .3s,color .3s,
   font-family:var(--mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--dim);
 }
 .submark .meta b{color:var(--pri);font-weight:500}
+
+/* --- marca en la barra de navegación --- */
+.brand .mk{flex:none}
+.brand .mk .s1{stroke:var(--pri)}
+.brand .mk .s2{stroke:var(--acc)}
+nav.over .brand .mk .s1{stroke:#fff}
+nav.over .brand .mk .s2{stroke:#5FD3CD}
