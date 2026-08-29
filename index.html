@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VDN Consulting</title>
+<meta name="robots" content="noindex">
+<link rel="alternate" hreflang="en" href="https://vdnconsulting.com/en/index.html">
+<link rel="alternate" hreflang="es" href="https://vdnconsulting.com/es/index.html">
+<link rel="alternate" hreflang="x-default" href="https://vdnconsulting.com/en/index.html">
+<meta http-equiv="refresh" content="0; url=en/index.html">
+<script>
+  var pref = null;
+  try { pref = localStorage.getItem('vdn-lang'); } catch (e) {}
+  if (!pref) pref = (navigator.language || 'en').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
+  location.replace(pref === 'es' ? 'es/index.html' : 'en/index.html');
+</script>
+</head>
+<body style="font-family:system-ui;padding:3rem;text-align:center">
+<p><a href="en/index.html">Continue in English</a> &middot; <a href="es/index.html">Continuar en español</a></p>
+</body>
+</html>
