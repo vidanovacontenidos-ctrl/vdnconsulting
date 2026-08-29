@@ -1,0 +1,26 @@
+VIDEO DEL HERO
+==============
+El sitio busca:  assets/video/hero.mp4
+Y como imagen previa: assets/video/hero-poster.jpg
+
+Si ninguno de los dos existe, el hero muestra un fondo degradado
+oscuro que se ve bien igual. No se rompe nada.
+
+REQUISITOS
+- MP4, códec H.264, sin audio (el video va en mute)
+- 1920x1080 o 2560x1440, entre 8 y 15 segundos, en loop limpio
+- Menos de 4 MB. Comprimir con Handbrake o ffmpeg:
+    ffmpeg -i original.mp4 -an -vf scale=1920:-2 -c:v libx264 \
+           -crf 30 -preset slow -movflags +faststart hero.mp4
+- Poster: primer fotograma exportado a JPG, ancho 1920, calidad 70
+
+QUÉ FILMAR O GENERAR
+Movimiento lento y continuo, sin cortes. Sirve muy bien:
+- Recorrido lateral lento frente a un rack con luces de estado
+- Primer plano de fibra o patchcords con foco desplazándose
+- Plano cenital de una oficina en movimiento, cámara rápida
+Evitar: caras reconocibles, logos de marcas, texto en pantalla,
+cortes bruscos (rompen el loop).
+
+NO uses el video de la especificación original: está alojado en la
+cuenta de otra persona y puede desaparecer sin aviso.

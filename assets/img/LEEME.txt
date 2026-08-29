@@ -1,0 +1,24 @@
+IMÁGENES — inventario y estado
+==============================
+Medidas contra los umbrales del diseño: luminancia >0,55 ·
+saturación <0,30 · menos de 8% de píxeles casi negros.
+
+  01-rack.jpg           16:9  Home              PASA
+  02-mesa-ayuda.jpg      4:5  U1                PASA (justo en negros)
+  03-patchera.jpg        4:5  U2                PASA (justo en negros)
+  04-cctv.jpg           16:9  U2 cierre         PASA
+  05-carga-manual.jpg    4:5  U3                PASA
+  06-desarrollo.jpg      4:5  U4                PASA
+  07-deposito.jpg       16:9  Home, caso 1      PASA
+  08-estudio.jpg        16:9  Home, caso 2      PASA
+  09-diagnostico.jpg    16:9  Home, caso 3      REGENERAR — muy oscura
+  11-cabina.jpg          4:5  U5                PASA
+  12-sala-culto.jpg     16:9  U5                PASA
+  13-hall.jpg           16:9  U5                PASA
+  og.jpg           1200x630  Vista previa       PASA
+
+TODAS SON RECORTES DE UN COLLAGE DE 1536x1024.
+Rondan los 250-450 px de ancho y en pantalla se van a ver blandas.
+Regeneralas de a una, a resolución completa, con el mismo prompt.
+
+Al reemplazarlas: mismo nombre de archivo, nada más que hacer.
