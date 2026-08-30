@@ -1,0 +1,15 @@
+ARCHIVOS SIN USO
+================
+Nada de acá está enlazado en el sitio. Se movieron para que no
+viajen en cada publicación, pero se conservan por si se necesitan.
+
+Podés borrar esta carpeta entera antes de subir sin romper nada.
+
+Lo que hay:
+- church.mp4 y church.jpg: el video del auditorio, sacado de la
+  sección del argumento de red cuando entró el del micrófono.
+- Fotos reemplazadas por video: 02-mesa-ayuda, 04-cctv, 05-carga-manual,
+  14-set, 15-acompanamiento, 16-maquetas.
+- Fondos abstractos que quedaron sin sección asignada.
+- Imágenes de baja resolución que nunca se regeneraron:
+  01-rack, 06-desarrollo, 11-cabina, 12-sala-culto, 13-hall.

@@ -217,3 +217,114 @@
     clearTimeout(t); t = setTimeout(build, 180);
   });
 })();
+
+/* ---- Cifras de la portada: cuentan desde cero una sola vez ---- */
+(function () {
+  'use strict';
+  var vals = document.querySelectorAll('.stat-v[data-to]');
+  if (!vals.length) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var pintar = function (el, n, dec, suf) {
+    el.textContent = (dec > 0 ? n.toFixed(dec) : Math.round(n)) + suf;
+  };
+
+  var correr = function (el, i) {
+    var to = parseFloat(el.dataset.to);
+    var dec = parseInt(el.dataset.dec || '0', 10);
+    var suf = el.dataset.suf || '';
+    if (reduce) { pintar(el, to, dec, suf); return; }
+    var dur = 1500 + i * 80, t0 = null;
+    var paso = function (ts) {
+      if (!t0) t0 = ts;
+      var p = Math.min(1, (ts - t0) / dur);
+      pintar(el, to * (1 - Math.pow(1 - p, 3)), dec, suf);
+      if (p < 1) requestAnimationFrame(paso);
+    };
+    setTimeout(function () { requestAnimationFrame(paso); }, 480 + i * 90);
+  };
+
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      correr(e.target, [].indexOf.call(vals, e.target));
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.25 });
+  vals.forEach(function (v) { io.observe(v); });
+})();
+
+/* ---- Recorrido: tarjetas que entran desde la derecha y menú que sigue ---- */
+(function () {
+  'use strict';
+  var cards = document.querySelectorAll('.fcard');
+  if (!cards.length) return;
+  var btns = document.querySelectorAll('.fbt');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reduce) {
+    cards.forEach(function (c) { c.classList.add('in'); });
+  } else {
+    var revelar = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        revelar.unobserve(e.target);
+      });
+    }, { threshold: 0.15 });
+    cards.forEach(function (c) { revelar.observe(c); });
+  }
+
+  var activo = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var i = e.target.dataset.i;
+      btns.forEach(function (b) { b.classList.toggle('on', b.dataset.i === i); });
+    });
+  }, { threshold: 0.6 });
+  cards.forEach(function (c) { activo.observe(c); });
+
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var c = document.querySelector('.fcard[data-i="' + b.dataset.i + '"]');
+      if (c) c.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+    });
+  });
+})();
+
+/* ---- Figuras que se desenfocan al salir de la pantalla ---- */
+(function () {
+  'use strict';
+  var els = document.querySelectorAll('.desenfoca');
+  if (!els.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var visibles = [], tick = false;
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      var i = visibles.indexOf(e.target);
+      if (e.isIntersecting && i < 0) visibles.push(e.target);
+      if (!e.isIntersecting && i > -1) { visibles.splice(i, 1); e.target.style.filter = ''; }
+    });
+  }, { threshold: 0 });
+  els.forEach(function (e) { io.observe(e); });
+
+  var pintar = function () {
+    var h = window.innerHeight;
+    visibles.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      var centro = r.top + r.height / 2;
+      // 0 en el centro de la pantalla, 1 en los bordes
+      var d = Math.min(1, Math.abs(centro - h / 2) / (h / 2 + r.height / 2));
+      var b = Math.pow(Math.max(0, d - 0.42) / 0.58, 2) * 9;
+      el.style.filter = b > 0.15 ? 'blur(' + b.toFixed(2) + 'px)' : '';
+    });
+  };
+  pintar();
+  window.addEventListener('scroll', function () {
+    if (tick) return;
+    tick = true;
+    requestAnimationFrame(function () { pintar(); tick = false; });
+  }, { passive: true });
+  window.addEventListener('resize', pintar);
+})();

@@ -117,7 +117,7 @@
 /* ---- Hero de video: animación por carácter y estado de la barra ---- */
 (function () {
   'use strict';
-  var hero = document.querySelector('.vhero');
+  var hero = document.querySelector('.vhero, .chero, .uhero.noche');
   if (!hero) return;
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -129,12 +129,30 @@
      con | como salto de línea, para que el HTML quede legible. */
   if (h1 && h1.dataset.text) {
     var lines = h1.dataset.text.split('|');
-    var n = 0;
+    var total = lines.join('').replace(/ /g, '').length;
+    var rampa = (h1.dataset.ramp || '').split(',').filter(Boolean);
+    var hex = function (c) {
+      c = c.trim().replace('#', '');
+      return [parseInt(c.substr(0, 2), 16), parseInt(c.substr(2, 2), 16), parseInt(c.substr(4, 2), 16)];
+    };
+    var paleta = rampa.map(hex);
+    var color = function (k) {
+      if (paleta.length < 2) return '';
+      var t = total > 1 ? k / (total - 1) : 0;
+      var seg = (paleta.length - 1) * t;
+      var i = Math.min(paleta.length - 2, Math.floor(seg));
+      var f = seg - i, a = paleta[i], b = paleta[i + 1];
+      return 'color:rgb(' + Math.round(a[0] + (b[0] - a[0]) * f) + ','
+             + Math.round(a[1] + (b[1] - a[1]) * f) + ','
+             + Math.round(a[2] + (b[2] - a[2]) * f) + ');';
+    };
+    var n = 0, k = 0;
     h1.innerHTML = lines.map(function (line) {
       var words = line.split(' ').map(function (word) {
         var chars = word.split('').map(function (c) {
           var d = reduce ? 0 : n++ * CHAR;
-          return '<span class="ch" style="transition-delay:' + d + 'ms">' + c + '</span>';
+          var col = color(k++);
+          return '<span class="ch" style="transition-delay:' + d + 'ms;' + col + '">' + c + '</span>';
         }).join('');
         return '<span class="wd">' + chars + '</span>';
       });
@@ -311,5 +329,24 @@
       b.classList.remove('on');
       b.setAttribute('aria-expanded', 'false');
     }
+  });
+})();
+
+/* ---- Video de fondo: solo en pantallas grandes ---- */
+(function () {
+  'use strict';
+  var vids = document.querySelectorAll('video[data-src]');
+  if (!vids.length) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || window.innerWidth < 900) return;   // en celular queda el póster
+
+  vids.forEach(function (v) {
+    var s = document.createElement('source');
+    s.src = v.dataset.src;
+    s.type = 'video/mp4';
+    v.appendChild(s);
+    v.load();
+    var play = v.play();
+    if (play && play.catch) play.catch(function () {});
   });
 })();

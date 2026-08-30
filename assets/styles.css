@@ -277,7 +277,6 @@ footer{padding:52px 0 40px;border-top:1px solid var(--line);background:var(--sur
 }
 .uhero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
 .uhero h1{font-size:clamp(38px,5vw,60px);margin:20px 0;font-variation-settings:'wdth' 106}
-.ubadge{display:inline-flex;align-items:center;gap:12px;background:var(--soft);color:var(--pri);font-family:var(--mono);font-size:11px;letter-spacing:.12em;padding:7px 14px;border-radius:100px;text-transform:uppercase;font-weight:500}
 
 .syms{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
 .sym{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:26px 24px}
@@ -673,24 +672,8 @@ nav.over .brand .mk .s2{stroke:#5FD3CD}
 .has-lights>.wrap{position:relative;z-index:1}
 
 /* --- portada de la vertical Church IT --- */
-.chero{position:relative;overflow:hidden;padding:64px 0 88px;background:var(--surface)}
-.chero::before{
-  content:"";position:absolute;inset:0;z-index:0;
-  background:url(../assets/img/fondos/church/manos.jpg) center/cover;
-  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 46%,transparent 82%);
-  mask-image:linear-gradient(90deg,#000 0%,#000 46%,transparent 82%);
-  opacity:.85;
-}
-.chero-in{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-.chero h1{font-size:clamp(40px,5.6vw,68px);margin:20px 0;font-variation-settings:'wdth' 106}
-.clock{display:inline-flex;align-items:center;gap:12px;margin-bottom:6px}
-.clock svg{flex:none}
-.clock b{font-family:var(--disp);font-variation-settings:'wdth' 118;font-weight:800;font-size:23px;letter-spacing:-.03em;color:var(--ink)}
-.clock b em{font-style:normal;color:var(--pri)}
 @media(max-width:900px){
-  .chero-in{grid-template-columns:1fr}
-  .chero::before{-webkit-mask-image:linear-gradient(180deg,transparent,#000 55%);mask-image:linear-gradient(180deg,transparent,#000 55%);opacity:.35}
-}
+    }
 
 /* ============================================================
    U5 DISEÑAR — capítulo visual propio
@@ -719,7 +702,6 @@ nav.over .brand .mk .s2{stroke:#5FD3CD}
 .dhero .lede{color:rgba(255,255,255,.74)}
 .dhero .eyebrow{color:#8F84FF}
 .dhero .eyebrow::before{background:#8F84FF}
-.dhero .ubadge{background:rgba(255,255,255,.09);color:#C6BEFF;border:1px solid rgba(255,255,255,.16)}
 .dhero .btn-ghost{border-color:rgba(255,255,255,.28);color:#fff;background:transparent}
 .dhero .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08);color:#fff}
 .dhero .hero-fine{color:rgba(255,255,255,.5)}
@@ -908,26 +890,6 @@ nav.over .burger i{background:#fff}
 /* proporción 3:2, para fotos horizontales dentro de una columna de portada */
 .ratio-32{aspect-ratio:3/2}
 
-/* ------------------------------------------------------------
-   Portada de unidad con imagen de fondo difuminada al costado
-   ------------------------------------------------------------ */
-.uhero-img{position:relative;overflow:hidden}
-.uhero-img::before{
-  content:"";position:absolute;inset:0;z-index:0;
-  background-image:var(--foto);background-size:cover;background-position:center;
-  -webkit-mask-image:linear-gradient(90deg,transparent 6%,#000 44%,#000 100%);
-  mask-image:linear-gradient(90deg,transparent 6%,#000 44%,#000 100%);
-  opacity:.9;
-}
-.uhero-img::after{
-  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(90deg,var(--bg) 0%,var(--bg) 26%,rgba(248,248,252,.72) 46%,transparent 68%);
-}
-.uhero-img>.wrap{position:relative;z-index:3}
-@media(max-width:900px){
-  .uhero-img::before{-webkit-mask-image:linear-gradient(180deg,transparent 10%,#000 62%);mask-image:linear-gradient(180deg,transparent 10%,#000 62%);opacity:.28}
-  .uhero-img::after{background:linear-gradient(180deg,var(--bg) 0%,rgba(248,248,252,.85) 50%,transparent 100%)}
-}
 
 /* bloque de texto con imagen al costado, sin centrar ni dejar huecos */
 .par{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center;margin-top:34px}
@@ -939,3 +901,499 @@ nav.over .burger i{background:#fff}
 .par .caps{grid-template-columns:1fr;margin-top:0}
 .par figure{align-self:stretch}
 .par figure img{height:100%}
+
+/* el breadcrumb vive dentro de la portada, no en una franja aparte */
+.dhero .crumb,.dhero .crumb{color:rgba(255,255,255,.5)}
+.dhero .crumb a{color:rgba(255,255,255,.72)}
+.dhero .crumb a:hover{color:#fff}
+.dhero{padding-top:26px}
+
+/* ============================================================
+   PORTADA DE DISEÑAR — composición centrada de una sola pieza
+   ============================================================ */
+
+.dhero .uhero-solo{max-width:840px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center}
+.dhero .lede{margin-left:auto;margin-right:auto;text-align:center}
+.dhero .hero-cta{justify-content:center}
+
+/* fila de respaldo: anillos superpuestos + píldora */
+.avales{
+  --ring:clamp(36px,4.4vw,42px);
+  display:inline-flex;align-items:center;margin-bottom:22px;
+}
+.avales i{
+  width:var(--ring);height:var(--ring);border-radius:50%;flex:none;
+  background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.34);
+  padding:5px;display:grid;place-items:center;
+  transition:transform .35s cubic-bezier(.22,.61,.36,1);
+}
+.avales i span{
+  width:100%;height:100%;border-radius:50%;background:#fff;
+  display:grid;place-items:center;
+}
+.avales i svg{width:52%;height:52%;display:block}
+.avales i:nth-child(1){z-index:1}
+.avales i:nth-child(2){margin-left:calc(var(--ring)*-.42);z-index:2}
+.avales i:nth-child(3){margin-left:calc(var(--ring)*-.42);z-index:3}
+.avales:hover i:nth-child(1){transform:translateY(-2px)}
+.avales:hover i:nth-child(2){transform:translateY(-4px)}
+.avales:hover i:nth-child(3){transform:translateY(-2px)}
+.avales b{
+  height:var(--ring);display:inline-flex;align-items:center;
+  margin-left:calc(var(--ring)*-.42);
+  padding:0 18px 0 calc(var(--ring)*.58);
+  background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.34);
+  border-radius:999px;color:rgba(255,255,255,.82);
+  font-family:var(--body);font-weight:500;font-size:clamp(12px,1.4vw,13.5px);
+  white-space:nowrap;
+}
+
+/* botón principal encendido sobre fondo oscuro */
+.dhero .btn-primary{
+  background:#fff;color:#14132B;
+  box-shadow:0 0 0 1px rgba(255,255,255,.16),
+             0 0 22px rgba(255,255,255,.30),
+             0 0 46px rgba(255,255,255,.11);
+  transition:transform .25s cubic-bezier(.22,.61,.36,1),box-shadow .25s ease;
+}
+.dhero .btn-primary:hover{
+  background:#fff;transform:translateY(-2px) scale(1.02);
+  box-shadow:0 0 0 1px rgba(255,255,255,.24),
+             0 0 30px rgba(255,255,255,.44),
+             0 0 66px rgba(255,255,255,.18);
+}
+
+/* la entrada suma desenfoque: se siente más cara y menos brusca */
+.motion .rv{filter:blur(6px);transition:opacity .78s cubic-bezier(.22,1,.36,1),transform .78s cubic-bezier(.22,1,.36,1),filter .78s cubic-bezier(.22,1,.36,1)}
+.motion .rv.in{filter:blur(0)}
+.motion .rv{transform:translateY(20px) scale(.985)}
+
+@media(max-width:680px){
+  .avales{--ring:34px}
+  .avales b{font-size:12px;padding-right:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  .motion .rv{filter:none;transform:none}
+}
+
+/* ------------------------------------------------------------
+   Diseñar usa la misma portada de la home, con fondo propio
+   ------------------------------------------------------------ */
+.vhero.dhero{padding:0;min-height:100svh;display:flex;flex-direction:column}
+.vhero.dhero .crumb{position:relative;z-index:3;max-width:var(--maxw);width:100%;margin:0 auto;padding:18px 24px 0;color:rgba(255,255,255,.5)}
+.vhero.dhero .crumb a{color:rgba(255,255,255,.72)}
+.vhero.dhero .crumb a:hover{color:#fff}
+.vhero.dhero .avales{margin-bottom:20px}
+.vhero.dhero h1{
+  font-size:clamp(42px,7vw,84px);letter-spacing:-.045em;
+  font-variation-settings:'wdth' 104;font-weight:700;margin:0 0 20px;
+}
+/* la segunda línea se pinta con el degradado de marca */
+.vhero.dhero .sub{color:rgba(255,255,255,.74);max-width:52ch}
+.vhero.dhero .vbtn-solid{
+  background:#fff;color:#14132B;
+  box-shadow:0 0 0 1px rgba(255,255,255,.16),0 0 22px rgba(255,255,255,.30),0 0 46px rgba(255,255,255,.11);
+}
+.vhero.dhero .vbtn-solid:hover{
+  background:#fff;transform:translateY(-2px) scale(1.02);
+  box-shadow:0 0 0 1px rgba(255,255,255,.24),0 0 30px rgba(255,255,255,.44),0 0 66px rgba(255,255,255,.18);
+}
+.vhero.dhero .lights{z-index:1}
+
+/* ============================================================
+   PORTADA DE UNA PANTALLA — tres regiones: arriba, centro, abajo
+   ============================================================ */
+.vhero.pantalla{
+  min-height:100svh;padding:0;display:flex;flex-direction:column;
+  justify-content:space-between;align-items:center;text-align:center;
+}
+.pz-top,.pz-mid,.pz-bot{position:relative;z-index:3;width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.pz-top{flex:0 0 auto;padding-top:20px}
+.pz-top .crumb{padding:0;justify-content:center;color:rgba(255,255,255,.45)}
+.pz-top .crumb a{color:rgba(255,255,255,.7)}
+.pz-mid{flex:1 1 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
+.pz-bot{flex:0 0 auto;padding-bottom:26px}
+
+.vhero.pantalla .avales{margin-bottom:26px}
+.vhero.pantalla h1{
+  font-size:clamp(38px,7.2vw,88px);letter-spacing:-.045em;line-height:1.06;
+  font-variation-settings:'wdth' 104;font-weight:700;margin:0 0 22px;color:#fff;
+}
+.vhero.pantalla .sub{
+  color:rgba(255,255,255,.72);max-width:min(560px,92%);margin:0 auto 30px;
+  font-size:clamp(15px,1.6vw,18px);line-height:1.55;
+}
+.vhero.pantalla .vhero-cta{justify-content:center;margin:0}
+
+/* fila de cifras al pie de la pantalla */
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
+  max-width:920px;margin:0 auto 18px;
+}
+.stat{display:flex;flex-direction:column;align-items:center;gap:5px}
+.stat-i{
+  font-family:var(--mono);font-size:clamp(19px,2.6vw,28px);color:#fff;opacity:.62;line-height:1;
+}
+.stat-v{
+  font-family:var(--disp);font-variation-settings:'wdth' 112;font-weight:700;
+  font-size:clamp(20px,2.4vw,30px);letter-spacing:-.03em;color:#fff;
+  font-variant-numeric:tabular-nums;line-height:1;
+}
+.stat-l{
+  font-family:var(--body);font-size:clamp(10.5px,1.2vw,12.5px);
+  color:rgba(255,255,255,.52);line-height:1.35;max-width:15ch;
+}
+.vhero.pantalla .vscroll{position:static;transform:none;margin-top:4px}
+
+@media(max-width:720px){
+  .stats{grid-template-columns:1fr 1fr;gap:22px 14px}
+  .vhero.pantalla h1{letter-spacing:-.055em}
+  .vhero.pantalla .vhero-cta .vbtn{flex:1}
+  .pz-bot{padding-bottom:20px}
+}
+@media(max-height:700px){
+  .vhero.pantalla .avales{margin-bottom:16px}
+  .vhero.pantalla h1{margin-bottom:14px}
+  .vhero.pantalla .sub{margin-bottom:20px}
+}
+
+/* ============================================================
+   RECORRIDO: columna fija a la izquierda, tarjetas a la derecha
+   ============================================================ */
+.flow{display:grid;grid-template-columns:1fr;gap:34px;margin-top:36px}
+.flow-side{display:flex;flex-direction:column;gap:22px}
+.flow-side h2{margin:0}
+.flow-nav{display:none;flex-direction:column;gap:7px}
+.fbt{
+  text-align:left;font-family:var(--body);font-size:14.5px;font-weight:500;
+  padding:12px 16px;border-radius:10px;border:1px solid transparent;cursor:pointer;
+  background:var(--surface);color:var(--dim);
+  transition:color .28s ease,background .28s ease,border-color .28s ease;
+}
+.fbt:hover{color:var(--ink-2)}
+.fbt.on{background:var(--soft);color:var(--pri);border-color:var(--pri)}
+.flow-cta{display:none}
+
+.flow-cards{display:flex;flex-direction:column;gap:20px}
+.fcard{
+  background:var(--surface);border:1px solid var(--line-2);border-radius:22px;
+  padding:28px 26px;
+  opacity:0;transform:translateX(56px);
+  transition:opacity .7s ease-out,transform .7s cubic-bezier(.22,1,.36,1);
+}
+.fcard.in{opacity:1;transform:none}
+.fcard-h{display:flex;align-items:center;gap:13px;margin-bottom:8px}
+.fcard-h svg{flex:none}
+.fcard h3{font-size:21px;margin:0}
+.fcard>span{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--acc);display:block;margin-bottom:16px;font-weight:500;
+}
+.fcard ul{list-style:none;font-size:15px;color:var(--ink-2);line-height:1.9}
+.fcard li::before{content:"—";color:var(--pri);margin-right:10px;opacity:.55}
+
+@media(min-width:1000px){
+  .flow{grid-template-columns:380px 1fr;gap:80px}
+  .flow-side{position:sticky;top:0;height:100vh;justify-content:center;padding:80px 0}
+  .flow-nav{display:flex}
+  .flow-cta{display:block;margin-top:8px}
+  .flow-cta p{font-size:14px;color:var(--dim);margin-bottom:12px;max-width:30ch}
+  .fcard{padding:34px 32px}
+}
+@media (prefers-reduced-motion:reduce){
+  .fcard{opacity:1;transform:none}
+  .flow-side{position:static;height:auto}
+}
+
+/* la sección siguiente monta sobre la portada con esquinas redondeadas */
+.monta{
+  position:relative;z-index:10;
+  border-radius:26px 26px 0 0;
+  background:var(--band);
+}
+
+/* barra de llamada dentro de la portada */
+.ctabar{
+  display:inline-flex;align-items:center;gap:16px;
+  background:rgba(20,19,43,.26);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-radius:14px;padding:5px 5px 5px 20px;margin-top:24px;
+}
+.ctabar span{font-size:14px;font-weight:500;color:var(--ink)}
+.ctabar .btn{padding:11px 20px;border-radius:10px}
+@media(max-width:680px){
+  .ctabar{flex-direction:column;align-items:stretch;gap:10px;padding:14px;width:100%}
+  .ctabar span{text-align:center}
+}
+
+/* una palabra del titular en cursiva con serif, como acento */
+.serifita{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400}
+
+/* la foto lateral se recorta a la altura del bloque, sin deformarse */
+.par figure{border-radius:16px;overflow:hidden;max-height:520px}
+.par figure img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
+
+/* ============================================================
+   VIDEO DE FONDO EN PORTADAS
+   Solo se carga en pantallas grandes; en celular queda la imagen.
+   ============================================================ */
+.vid-bg{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  z-index:0;pointer-events:none;
+}
+/* portadas oscuras: el video se atenúa para que el texto respire */
+.vhero .vid-bg,.vhero.dhero .vid-bg{opacity:.42;filter:invert(1);mix-blend-mode:screen}
+/* si hay video, el lienzo animado se apaga: dos fondos en movimiento es ruido */
+.tiene-video .lights,.tiene-video .vhero-net{display:none}
+/* portadas claras: el video reemplaza a la imagen de fondo */
+
+/* video vertical dentro de una figura */
+figure video{width:100%;height:100%;object-fit:cover;display:block}
+
+/* ------------------------------------------------------------
+   Video de fondo en una sección clara: va con velo para que el
+   texto oscuro siga legible.
+   ------------------------------------------------------------ */
+.sec-video{position:relative;overflow:hidden;isolation:isolate;background:var(--band)}
+.vid-sec{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  z-index:0;pointer-events:none;opacity:.30;
+  -webkit-mask-image:linear-gradient(90deg,transparent 2%,#000 38%,#000 100%);
+  mask-image:linear-gradient(90deg,transparent 2%,#000 38%,#000 100%);
+}
+.vid-velo{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg,var(--band) 0%,rgba(241,240,250,.94) 30%,rgba(241,240,250,.72) 62%,rgba(241,240,250,.58) 100%);
+}
+.sec-video>.wrap{position:relative;z-index:2}
+@media(max-width:900px){
+  .vid-sec{-webkit-mask-image:linear-gradient(180deg,transparent 4%,#000 52%);mask-image:linear-gradient(180deg,transparent 4%,#000 52%);opacity:.18}
+  .vid-velo{background:linear-gradient(180deg,var(--band) 0%,rgba(241,240,250,.9) 45%,rgba(241,240,250,.8) 100%)}
+}
+
+/* ============================================================
+   TODAS LAS PORTADAS DE UNIDAD ABREN EN OSCURO
+   El cuerpo sigue claro: el contraste marca el cambio de capítulo.
+   ============================================================ */
+.uhero.noche{
+  position:relative;overflow:hidden;color:#fff;padding-top:26px;
+  background:
+    radial-gradient(ellipse 62% 78% at 82% 18%,#33269B 0%,transparent 60%),
+    radial-gradient(ellipse 54% 66% at 8% 94%,#0C4F4C 0%,transparent 56%),
+    linear-gradient(162deg,#151138 0%,#0A0818 100%);
+}
+.uhero.noche::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(ellipse 64% 70% at 26% 8%,#000,transparent 74%);
+  mask-image:radial-gradient(ellipse 64% 70% at 26% 8%,#000,transparent 74%);
+}
+.uhero.noche>*{position:relative;z-index:3}
+.uhero.noche h1{color:#fff}
+.uhero.noche .lede{color:rgba(255,255,255,.74)}
+.uhero.noche .eyebrow{color:#8F84FF}
+.uhero.noche .eyebrow::before{background:#8F84FF}
+.uhero.noche .crumb{color:rgba(255,255,255,.46);padding-bottom:6px}
+.uhero.noche .crumb a{color:rgba(255,255,255,.7)}
+.uhero.noche .crumb a:hover{color:#fff}
+.uhero.noche .hero-fine{color:rgba(255,255,255,.5)}
+.uhero.noche .btn-ghost{border-color:rgba(255,255,255,.28);color:#fff;background:transparent}
+.uhero.noche .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08);color:#fff}
+.uhero.noche .btn-primary{
+  background:#fff;color:#14132B;
+  box-shadow:0 0 0 1px rgba(255,255,255,.16),0 0 22px rgba(255,255,255,.28),0 0 46px rgba(255,255,255,.10);
+}
+.uhero.noche .btn-primary:hover{background:#fff;transform:translateY(-2px) scale(1.02)}
+.uhero.noche figure{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.05)}
+
+/* la portada de Church IT también abre oscura */
+@media(max-width:900px){
+    }
+
+/* Construir tiene video + fondo nocturno: el degradado va encima del video */
+
+/* ------------------------------------------------------------
+   Ajustes de la portada de una pantalla
+   ------------------------------------------------------------ */
+.vhero.pantalla{justify-content:center}
+.vhero.pantalla .pz-mid{flex:0 1 auto;gap:0}
+.vhero.pantalla h1{margin:0 0 18px}
+.vhero.pantalla .sub{margin:0 auto 26px}
+.vhero.pantalla .pz-bot{padding-bottom:0}
+.vhero.pantalla .pz-bot:empty{display:none}
+
+/* Church IT: la imagen respira con un acercamiento muy lento */
+@keyframes respira{
+  from{transform:scale(1) translateX(0)}
+  to{transform:scale(1.07) translateX(-1.2%)}
+}
+/* destello suave que recorre la imagen */
+@keyframes barrido{
+  0%,100%{background-position:120% 0;opacity:0}
+  45%{opacity:1}
+  60%{background-position:-40% 0;opacity:0}
+}
+@media (prefers-reduced-motion:reduce){
+    }
+
+/* ============================================================
+   CORRECCIÓN DE PROPORCIÓN Y CAPAS EN LAS PORTADAS
+   ============================================================ */
+
+/* Church IT: una sola columna con ancho medido, no media pantalla vacía */
+@media(max-width:900px){
+    }
+
+/* Construir: el velo oscuro cubre todo, sin heredar la máscara del grid */
+/* la grilla técnica va en una capa aparte, con su propia máscara */
+
+/* ============================================================
+   PORTADAS CON MEDIO: el contenido va adentro, centrado
+   ============================================================ */
+
+/* el velo cubre todo y se oscurece donde vive el texto */
+
+/* las letras entran una por una, igual que en la home */
+
+@media(max-width:900px){
+    }
+@media (prefers-reduced-motion:reduce){
+    }
+
+/* ------------------------------------------------------------
+   Velo del hero con video: una sola capa, sin máscaras heredadas
+   ------------------------------------------------------------ */
+.vhero.pantalla .velo{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:rgba(10,8,24,.62);
+}
+.vhero.pantalla .vid-bg{opacity:.85;z-index:0}
+.vhero.pantalla .pz-mid{z-index:3}
+.vhero.pantalla .vtag{align-self:center}
+
+/* ------------------------------------------------------------
+   Church IT: misma estructura que Diseñar, con imagen de fondo
+   ------------------------------------------------------------ */
+.foto-bg{
+  position:absolute;inset:0;z-index:0;
+  background:url(../assets/img/fondos/church/manos.jpg) center/cover;
+  animation:respira 26s ease-in-out infinite alternate;
+}
+.vhero.pantalla .brillo{
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(104deg,transparent 34%,rgba(169,155,255,.14) 47%,rgba(79,227,216,.09) 53%,transparent 66%);
+  background-size:260% 100%;
+  animation:barrido 11s ease-in-out infinite;
+}
+.vhero.pantalla .lights{z-index:2;opacity:.75}
+.vhero.pantalla .hero-fine{margin:14px 0 0;color:rgba(255,255,255,.5);text-align:center}
+.vhero.pantalla .ctabar{margin-top:22px;background:rgba(255,255,255,.10)}
+.vhero.pantalla .ctabar span{color:#fff}
+@media (prefers-reduced-motion:reduce){
+  .foto-bg{animation:none}
+  .vhero.pantalla .brillo{display:none}
+}
+
+/* ============================================================
+   La barra flota sobre la portada, no ocupa espacio propio
+   ============================================================ */
+nav{position:fixed;top:0;left:0;right:0}
+nav.over{background:transparent;border-bottom-color:transparent;padding-top:12px}
+nav.over .nav-in{
+  border-radius:16px;padding:10px 14px;margin:0 auto;
+  background:rgba(12,10,28,.42);
+  backdrop-filter:blur(14px) saturate(1.2);
+  -webkit-backdrop-filter:blur(14px) saturate(1.2);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 10px 30px -14px rgba(0,0,0,.7);
+}
+/* las portadas dejan aire arriba para que la barra no tape el contenido */
+.uhero.noche{padding-top:104px}
+.vhero.pantalla .pz-mid{padding-top:64px}
+/* al bajar, la barra vuelve a su fondo claro y ocupa todo el ancho */
+nav:not(.over) .nav-in{border-radius:0;background:transparent;box-shadow:none;padding:13px 24px}
+@media(max-width:1000px){
+  nav.over .nav-in{border-radius:14px;padding:8px 12px}
+  .uhero.noche{padding-top:88px}
+}
+
+/* el cajón del menú acompaña a la barra fija */
+.drawer{position:fixed;top:64px;left:0;right:0;z-index:49;box-shadow:0 20px 44px -22px rgba(20,19,43,.5)}
+nav.over + .drawer{background:rgba(12,10,28,.94);backdrop-filter:blur(14px);border-top-color:rgba(255,255,255,.12)}
+nav.over + .drawer a{color:#fff;border-bottom-color:rgba(255,255,255,.10)}
+nav.over + .drawer a.on{color:#A99BFF}
+
+/* la figura se desenfoca a medida que sale de la pantalla */
+.desenfoca{will-change:filter,transform;transition:filter .12s linear}
+@media (prefers-reduced-motion:reduce){.desenfoca{filter:none!important}}
+
+/* portada de inicio: una sola columna, sin la píldora flotando suelta */
+.vhero-solo{position:relative;z-index:2;max-width:820px}
+.vhero-solo .vtag{
+  display:inline-flex;align-items:center;margin-top:24px;
+  padding:12px 20px;border-radius:12px;font-size:clamp(14px,1.4vw,17px);font-weight:400;
+}
+@media(max-width:900px){.vhero-solo .vtag{width:100%;justify-content:center;text-align:center}}
+
+/* bloque a dos columnas con la imagen a la izquierda */
+.par-inv{grid-template-columns:.82fr 1.18fr;align-items:center}
+.par-inv figure{max-height:460px}
+.par-inv table{margin-top:0}
+@media(max-width:900px){.par-inv{grid-template-columns:1fr}}
+
+/* la foto junto a la tabla es textura, no dato: va desenfocada */
+.par-inv figure{overflow:hidden}
+.par-inv figure img{
+  filter:blur(3px) saturate(.62) brightness(1.04);
+  transform:scale(1.06);
+}
+
+/* las tablas no se desbordan en celular */
+.spec{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.spec thead,.spec tbody,.spec tr{display:table;width:100%;table-layout:fixed}
+@media(max-width:680px){
+  .spec{white-space:normal}
+  .spec thead,.spec tbody,.spec tr{width:max-content;min-width:100%}
+  .spec th,.spec td{min-width:120px}
+  .spec td:first-child,.spec th:first-child{min-width:130px}
+}
+
+/* ------------------------------------------------------------
+   Video de portada: enfriado hacia el índigo de la marca
+   ------------------------------------------------------------ */
+.vhero .vid-bg{
+  filter:saturate(.38) hue-rotate(-20deg) brightness(.82) contrast(1.05);
+  opacity:1;
+}
+/* el de Diseñar es partículas invertidas: no lleva el enfriado */
+.vhero.dhero .vid-bg{filter:invert(1);mix-blend-mode:screen;opacity:.42}
+
+/* la portada arranca en el borde superior; la barra flota encima */
+.vhero{margin-top:0}
+.vhero.pantalla .pz-mid{padding-top:56px}
+
+/* el breadcrumb dentro de la portada oscura */
+.uhero.noche>.crumb{
+  position:relative;z-index:4;max-width:var(--maxw);margin:0 auto;
+  padding:0 24px 10px;color:rgba(255,255,255,.46);
+}
+.uhero.noche>.crumb a{color:rgba(255,255,255,.7)}
+.uhero.noche>.crumb a:hover{color:#fff}
+
+/* ------------------------------------------------------------
+   La barra sobre la portada no lleva desenfoque propio:
+   ese filtro dejaba una franja lechosa de ancho completo arriba.
+   El vidrio vive solo en la píldora.
+   ------------------------------------------------------------ */
+nav.over{
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+  background:transparent;border-bottom-color:transparent;
+}
+
+/* video de portada más oscuro */
+.vhero .vid-bg{
+  filter:saturate(.34) hue-rotate(-20deg) brightness(.56) contrast(1.08);
+}
+.vhero.dhero .vid-bg{filter:invert(1);mix-blend-mode:screen;opacity:.42}
+.vhero.pantalla .velo{background:rgba(10,8,24,.5)}
+nav.over{padding-top:12px}

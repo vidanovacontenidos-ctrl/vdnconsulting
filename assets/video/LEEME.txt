@@ -1,31 +1,29 @@
-FONDO DEL HERO
-==============
-Ya no hace falta ningún video. El hero usa una red animada dibujada
-por código: nodos, enlaces y pulsos de datos recorriéndolos.
+VIDEOS DE FONDO
+===============
+Todos comprimidos a 25 fps, sin audio, con fundido cruzado de 0,6 s
+al final para que el bucle cierre sin salto.
 
-Está en assets/app.js, al final, en el bloque
-"Fondo animado del hero: topología de red con pulsos".
+  disenar.mp4      768 px    17 s   0,20 MB   portada de Diseñar
+  construir.mp4   1600 px    14 s   0,41 MB   portada de Construir
+  church.mp4      1600 px    11 s   1,36 MB   portada de Church IT
+  automatizar.mp4  900 px    13 s   1,03 MB   figura de Automatizar (vertical)
+  sostener.mp4     900 px    13 s   0,47 MB   figura de Sostener (vertical)
 
-QUÉ PODÉS AJUSTAR (arriba de ese bloque)
-  INK        color de enlaces y nodos, en formato "R,G,B"
-  PULSE      color del pulso principal
-  PULSE_ALT  color del pulso de acento
-  Densidad:  w*h/42000 -> número más chico = más nodos
-  Velocidad: 0.0035 + Math.random()*0.004
-  Frecuencia de pulsos: Math.random() < 0.045
+Cada uno tiene su .jpg con el mismo nombre: es la imagen de portada
+que se ve mientras carga, y la única que se muestra en celular.
 
-DETALLES
-- Se pausa sola cuando el hero sale de pantalla, así no gasta batería
-- Respeta prefers-reduced-motion: dibuja un cuadro fijo, sin movimiento
-- Se redibuja al cambiar el tamaño de la ventana
-- Pesa unos 3 KB, contra los 4 MB que pesaría un video
+CÓMO FUNCIONA LA CARGA
+El <video> no lleva <source> en el HTML: lleva data-src. El script de
+assets/app.js inyecta la fuente solo si la pantalla supera los 900 px
+y si el visitante no pidió reducir el movimiento. En celular nunca se
+descarga el video, solo el póster de 30 a 50 KB.
 
-SI IGUAL QUERÉS PONER UN VIDEO
-Agregá dentro de <header class="vhero"> y antes del canvas:
+PARA REEMPLAZAR UNO
+Mismo nombre de archivo y listo. Para regenerar desde un original:
 
-  <video autoplay loop muted playsinline
-         poster="../assets/video/hero-poster.jpg">
-    <source src="../assets/video/hero.mp4" type="video/mp4">
-  </video>
+  ffmpeg -i original.mp4 -t 14 -an -vf "scale=1600:-2,fps=25" \
+         -c:v libx264 -crf 32 -preset slow -movflags +faststart salida.mp4
 
-Y en styles.css subile el z-index a 2 para que tape el lienzo.
+Y la imagen de portada:
+
+  ffmpeg -i salida.mp4 -ss 1 -frames:v 1 salida.jpg
