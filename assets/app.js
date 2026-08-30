@@ -318,8 +318,7 @@
     c.href = a.getAttribute('href');
     var vertical = /church/i.test(c.href);
     c.className = 'mcard' + (vertical ? ' mcard-v' : '') + (a.classList.contains('on') ? ' on' : '');
-    var num = vertical ? '' : '<span class="mcard-u">U' + (i + 1) + '</span>';
-    c.innerHTML = num + '<span class="mcard-n">' + a.textContent.trim() + '</span>';
+    c.innerHTML = '<span class="mcard-n">' + a.textContent.trim() + '</span>';
     grilla.appendChild(c);
   });
   drawer.appendChild(grilla);
@@ -331,16 +330,23 @@
     drawer.appendChild(d);
   }
 
+  var x = document.createElement('button');
+  x.className = 'menu-x';
+  x.setAttribute('aria-label', 'Cerrar');
+  x.innerHTML = '&times;';
+  drawer.appendChild(x);
+  x.addEventListener('click', function () { cerrar(); });
+
   var lang = nav.querySelector('.lang');
   nav.insertBefore(b, lang ? lang.nextSibling : null);
   nav.parentNode.appendChild(drawer);
 
-  var cerrar = function () {
+  function cerrar() {
     drawer.classList.remove('on');
     b.classList.remove('on');
     b.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
-  };
+  }
   b.addEventListener('click', function () {
     var on = drawer.classList.toggle('on');
     b.classList.toggle('on', on);

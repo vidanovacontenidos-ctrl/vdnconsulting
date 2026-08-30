@@ -1429,9 +1429,6 @@ nav.over{padding-top:12px}
   transition:background .2s ease,border-color .2s ease,transform .2s ease;
 }
 .mcard:active{transform:scale(.97)}
-.mcard-u{
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;color:#4FE3D8;font-weight:500;
-}
 .mcard-n{
   font-family:var(--disp);font-variation-settings:'wdth' 116;font-weight:700;
   font-size:16px;letter-spacing:-.02em;color:#fff;line-height:1.15;
@@ -1451,3 +1448,14 @@ nav.over{padding-top:12px}
   .menu-cta{margin-top:16px}
 }
 @media (prefers-reduced-motion:reduce){.drawer{animation:none}.mcard:active{transform:none}}
+
+/* botón de cierre del menú */
+.menu-x{
+  position:absolute;top:16px;right:16px;width:44px;height:44px;
+  border-radius:50%;border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.06);color:#fff;font-size:26px;line-height:1;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+.menu-x:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4)}
+.mcard{align-items:flex-start;justify-content:center;min-height:76px}
+.mcard-v{min-height:64px}
