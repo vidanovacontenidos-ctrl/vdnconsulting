@@ -1550,3 +1550,7 @@ html,body{max-width:100%;overflow-x:hidden}
   .mcard{min-height:80px}
 }
 .btn-sm{min-height:44px}
+
+/* viñetas con encabezado en negrita dentro de las tarjetas del recorrido */
+.fcard li b{color:var(--ink);font-weight:600;margin-right:2px}
+.fcard li{margin-bottom:3px}
