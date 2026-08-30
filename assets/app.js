@@ -346,12 +346,14 @@
     b.classList.remove('on');
     b.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
+    document.body.classList.remove('menu-on');
   }
   b.addEventListener('click', function () {
     var on = drawer.classList.toggle('on');
     b.classList.toggle('on', on);
     b.setAttribute('aria-expanded', on);
     document.body.style.overflow = on ? 'hidden' : '';
+    document.body.classList.toggle('menu-on', on);
   });
   drawer.addEventListener('click', function (e) { if (e.target.closest('a')) cerrar(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrar(); });

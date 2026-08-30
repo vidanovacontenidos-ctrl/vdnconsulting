@@ -817,13 +817,6 @@ nav.over .brand .mk .s2{stroke:#5FD3CD}
 nav.over .burger{background:transparent;border-color:rgba(255,255,255,.3)}
 nav.over .burger i{background:#fff}
 
-.drawer{
-  display:none;border-top:1px solid var(--line);background:var(--surface);
-  padding:8px 24px 18px;
-}
-.drawer.on{display:block}
-.drawer a:last-child{border-bottom:0}
-.drawer a.on{color:var(--pri);font-weight:500}
 
 @media(max-width:1000px){
   .burger{display:block}
@@ -1312,8 +1305,6 @@ nav:not(.over) .nav-in{border-radius:0;background:transparent;box-shadow:none;pa
   .uhero.noche{padding-top:88px}
 }
 
-/* el cajón del menú acompaña a la barra fija */
-.drawer{position:fixed;top:64px;left:0;right:0;z-index:49;box-shadow:0 20px 44px -22px rgba(20,19,43,.5)}
 
 /* la figura se desenfoca a medida que sale de la pantalla */
 .desenfoca{will-change:filter,transform;transition:filter .12s linear}
@@ -1328,17 +1319,8 @@ nav:not(.over) .nav-in{border-radius:0;background:transparent;box-shadow:none;pa
 @media(max-width:900px){.vhero-solo .vtag{width:100%;justify-content:center;text-align:center}}
 
 /* bloque a dos columnas con la imagen a la izquierda */
-.par-inv{grid-template-columns:.82fr 1.18fr;align-items:center}
-.par-inv figure{max-height:460px}
-.par-inv table{margin-top:0}
-@media(max-width:900px){.par-inv{grid-template-columns:1fr}}
 
 /* la foto junto a la tabla es textura, no dato: va desenfocada */
-.par-inv figure{overflow:hidden}
-.par-inv figure img{
-  filter:blur(3px) saturate(.62) brightness(1.04);
-  transform:scale(1.06);
-}
 
 /* las tablas no se desbordan en celular */
 .spec{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
@@ -1459,3 +1441,112 @@ nav.over{padding-top:12px}
 .menu-x:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4)}
 .mcard{align-items:flex-start;justify-content:center;min-height:76px}
 .mcard-v{min-height:64px}
+
+/* el epígrafe de la tabla ocupa el ancho completo y no se parte */
+.spec caption{
+  display:block;width:100%;box-sizing:border-box;
+  text-align:left;padding:0 0 14px;white-space:normal;
+}
+
+/* ------------------------------------------------------------
+   Sección con foto de fondo desenfocada y la tabla a ancho completo
+   ------------------------------------------------------------ */
+.sec-foto{position:relative;overflow:hidden;isolation:isolate;background:var(--band)}
+.foto-fondo{
+  position:absolute;inset:0;z-index:0;
+  background:url(../assets/img/unidades/03-patchera.jpg) center 38%/cover;
+  filter:blur(9px) saturate(.55);
+  transform:scale(1.12);
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 58%,transparent 96%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 58%,transparent 96%);
+}
+.foto-velo{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(241,240,250,.72) 0%,rgba(241,240,250,.9) 55%,var(--band) 100%);
+}
+.sec-foto>.wrap{position:relative;z-index:2}
+.sec-foto .spec{box-shadow:0 22px 50px -30px rgba(20,19,43,.45)}
+@media(max-width:900px){
+  .foto-fondo{filter:blur(11px) saturate(.5);transform:scale(1.16)}
+  .foto-velo{background:linear-gradient(180deg,rgba(241,240,250,.86),var(--band))}
+}
+
+/* ============================================================
+   MENÚ ABIERTO: es un estado del sitio, no solo del cajón
+   ============================================================ */
+.drawer{z-index:70;background:#0A0818}
+
+/* la barra se vuelve oscura y transparente mientras el menú está abierto */
+body.menu-on nav{
+  background:transparent!important;border-bottom-color:transparent!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  z-index:71;
+}
+body.menu-on nav .nav-in{background:transparent!important;box-shadow:none!important;border-radius:0}
+body.menu-on .brand{color:#fff}
+body.menu-on .brand .mk .s1{stroke:#fff}
+body.menu-on .brand .mk .s2{stroke:#5FD3CD}
+body.menu-on .burger{background:transparent;border-color:rgba(255,255,255,.3)}
+body.menu-on .burger i{background:#fff}
+body.menu-on .lang{border-color:rgba(255,255,255,.3)}
+body.menu-on .lang a{color:rgba(255,255,255,.66)}
+body.menu-on .lang a.on{background:#fff;color:#0A0818}
+
+/* el botón de WhatsApp no puede quedar encima del menú */
+body.menu-on .wa{opacity:0;pointer-events:none;transition:opacity .2s ease}
+
+/* la X del menú queda por debajo de la barra: se apoya abajo */
+.menu-x{display:none}
+
+/* ============================================================
+   AUDITORÍA MÓVIL — correcciones
+   ============================================================ */
+
+/* 1 · iOS hace zoom automático si un campo tiene menos de 16px */
+input[type=text],input[type=email],input[type=tel],select,textarea{font-size:16px}
+
+/* 2 · zonas táctiles a 44px como mínimo */
+@media(max-width:1000px){
+  .lang a{padding:13px 14px;font-size:11.5px}
+  .burger{width:44px;height:44px}
+  .burger i{left:13px;right:13px}
+  .burger i:nth-child(1){top:16px}
+  .burger i:nth-child(2){top:21px}
+  .burger i:nth-child(3){top:26px}
+  .foot-col a{padding:11px 0}
+  .foot-col{gap:0}
+  .foot-col b{margin-bottom:8px}
+  .tbt{padding:14px 18px}
+  .vbtn,.btn{min-height:48px}
+  .promo-x{width:44px;height:44px}
+  .menu-x{width:48px;height:48px}
+}
+
+/* 3 · el botón principal sin padding heredado siempre llega a 44 */
+.btn,.vbtn{min-height:44px}
+
+/* 4 · nada puede desbordar su columna */
+.compare>*,.caps>*,.cases>*,.syms>*,.plans>*,.steps>*,.calc>*,.cta-grid>*,
+.hero-grid>*,.uhero-grid>*,.unit>*,.flow>*,.menu-grid>*,.par>*{min-width:0}
+.cap li,.fcard li,.plan li,.checklist li,.col-a li,.col-b li,
+.mcard-n,.terr-copy,.sub,.lede{overflow-wrap:anywhere}
+
+/* 5 · seguro contra desplazamiento horizontal */
+html,body{max-width:100%;overflow-x:hidden}
+
+/* 6 · el botón de WhatsApp no tapa el final del contenido */
+@media(max-width:680px){
+  footer{padding-bottom:88px}
+}
+
+/* altura táctil garantizada, sin depender del cálculo de relleno */
+@media(max-width:1000px){
+  .lang a{min-height:44px;display:flex;align-items:center;padding:0 14px}
+  .lang{align-items:stretch}
+  .foot-col a{min-height:44px;display:flex;align-items:center;padding:0}
+  .tbt{min-height:46px;display:flex;align-items:center}
+  .fbt{min-height:48px;display:flex;align-items:center}
+  .promo-menos{min-height:44px;padding:0 4px}
+  .mcard{min-height:80px}
+}
+.btn-sm{min-height:44px}
