@@ -294,7 +294,7 @@
   });
 })();
 
-/* ---- Menú desplegable en celular ---- */
+/* ---- Menú de celular: cuadrícula de unidades ---- */
 (function () {
   'use strict';
   var nav = document.querySelector('nav .nav-in');
@@ -309,27 +309,46 @@
 
   var drawer = document.createElement('div');
   drawer.className = 'drawer';
-  drawer.innerHTML = links.innerHTML;
+
+  var grilla = document.createElement('div');
+  grilla.className = 'menu-grid';
+  var anclas = [].slice.call(links.querySelectorAll('a'));
+  anclas.forEach(function (a, i) {
+    var c = document.createElement('a');
+    c.href = a.getAttribute('href');
+    var vertical = /church/i.test(c.href);
+    c.className = 'mcard' + (vertical ? ' mcard-v' : '') + (a.classList.contains('on') ? ' on' : '');
+    var num = vertical ? '' : '<span class="mcard-u">U' + (i + 1) + '</span>';
+    c.innerHTML = num + '<span class="mcard-n">' + a.textContent.trim() + '</span>';
+    grilla.appendChild(c);
+  });
+  drawer.appendChild(grilla);
 
   var cta = nav.querySelector('.btn');
-  if (cta) drawer.appendChild(cta.cloneNode(true));
+  if (cta) {
+    var d = cta.cloneNode(true);
+    d.className = 'btn btn-primary menu-cta';
+    drawer.appendChild(d);
+  }
 
   var lang = nav.querySelector('.lang');
-  nav.insertBefore(b, lang || null);
+  nav.insertBefore(b, lang ? lang.nextSibling : null);
   nav.parentNode.appendChild(drawer);
 
+  var cerrar = function () {
+    drawer.classList.remove('on');
+    b.classList.remove('on');
+    b.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  };
   b.addEventListener('click', function () {
     var on = drawer.classList.toggle('on');
     b.classList.toggle('on', on);
     b.setAttribute('aria-expanded', on);
+    document.body.style.overflow = on ? 'hidden' : '';
   });
-  drawer.addEventListener('click', function (e) {
-    if (e.target.tagName === 'A') {
-      drawer.classList.remove('on');
-      b.classList.remove('on');
-      b.setAttribute('aria-expanded', 'false');
-    }
-  });
+  drawer.addEventListener('click', function (e) { if (e.target.closest('a')) cerrar(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrar(); });
 })();
 
 /* ---- Video de fondo: solo en pantallas grandes ---- */

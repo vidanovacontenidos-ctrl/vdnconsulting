@@ -822,13 +822,8 @@ nav.over .burger i{background:#fff}
   padding:8px 24px 18px;
 }
 .drawer.on{display:block}
-.drawer a{
-  display:block;padding:14px 0;border-bottom:1px solid var(--line);
-  font-size:16px;color:var(--ink);
-}
 .drawer a:last-child{border-bottom:0}
 .drawer a.on{color:var(--pri);font-weight:500}
-.drawer .btn{width:100%;margin-top:14px}
 
 @media(max-width:1000px){
   .burger{display:block}
@@ -1319,9 +1314,6 @@ nav:not(.over) .nav-in{border-radius:0;background:transparent;box-shadow:none;pa
 
 /* el cajón del menú acompaña a la barra fija */
 .drawer{position:fixed;top:64px;left:0;right:0;z-index:49;box-shadow:0 20px 44px -22px rgba(20,19,43,.5)}
-nav.over + .drawer{background:rgba(12,10,28,.94);backdrop-filter:blur(14px);border-top-color:rgba(255,255,255,.12)}
-nav.over + .drawer a{color:#fff;border-bottom-color:rgba(255,255,255,.10)}
-nav.over + .drawer a.on{color:#A99BFF}
 
 /* la figura se desenfoca a medida que sale de la pantalla */
 .desenfoca{will-change:filter,transform;transition:filter .12s linear}
@@ -1397,3 +1389,65 @@ nav.over{
 .vhero.dhero .vid-bg{filter:invert(1);mix-blend-mode:screen;opacity:.42}
 .vhero.pantalla .velo{background:rgba(10,8,24,.5)}
 nav.over{padding-top:12px}
+
+/* ============================================================
+   BARRA EN CELULAR — corrección del desborde
+   ============================================================ */
+@media(max-width:1000px){
+  nav .nav-in{gap:10px;padding:10px 16px}
+  nav .btn-sm{display:none}          /* el botón vive dentro del menú */
+  .lang{order:2;margin-left:auto}
+  .burger{order:3;margin-left:0}
+  .brand{font-size:15px;flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .lang a{padding:10px 12px;font-size:11px}
+}
+@media(max-width:380px){
+  .brand span,.brand{font-size:14px}
+  .lang a{padding:9px 10px}
+}
+
+/* ============================================================
+   MENÚ DE CELULAR — cuadrícula de unidades
+   ============================================================ */
+.drawer{
+  position:fixed;top:0;left:0;right:0;bottom:0;z-index:48;
+  display:none;flex-direction:column;
+  padding:74px 16px 20px;
+  background:rgba(10,8,24,.975);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-top:0;box-shadow:none;
+  animation:menuEntra .28s cubic-bezier(.22,1,.36,1);
+}
+.drawer.on{display:flex}
+@keyframes menuEntra{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.mcard{
+  display:flex;flex-direction:column;gap:4px;
+  padding:15px 13px;border-radius:12px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);
+  transition:background .2s ease,border-color .2s ease,transform .2s ease;
+}
+.mcard:active{transform:scale(.97)}
+.mcard-u{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;color:#4FE3D8;font-weight:500;
+}
+.mcard-n{
+  font-family:var(--disp);font-variation-settings:'wdth' 116;font-weight:700;
+  font-size:16px;letter-spacing:-.02em;color:#fff;line-height:1.15;
+}
+.mcard.on{background:rgba(143,132,255,.2);border-color:rgba(143,132,255,.55)}
+.mcard-v{
+  grid-column:1/-1;flex-direction:row;align-items:center;
+  background:rgba(143,132,255,.16);border-color:rgba(143,132,255,.42);
+}
+.mcard-v .mcard-n{font-size:17px}
+.menu-cta{margin-top:auto;width:100%;padding:15px;font-size:15.5px}
+
+@media(min-width:1001px){.drawer,.burger{display:none!important}}
+@media(max-height:620px){
+  .drawer{padding-top:66px;overflow-y:auto}
+  .mcard{padding:12px 11px}
+  .menu-cta{margin-top:16px}
+}
+@media (prefers-reduced-motion:reduce){.drawer{animation:none}.mcard:active{transform:none}}
