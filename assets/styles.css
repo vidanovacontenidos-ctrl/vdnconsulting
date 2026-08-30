@@ -291,7 +291,6 @@ footer{padding:52px 0 40px;border-top:1px solid var(--line);background:var(--sur
 .cap li::before{content:"—";color:var(--pri);margin-right:10px;opacity:.55}
 
 .spec{width:100%;border-collapse:collapse;margin-top:36px;border:1px solid var(--line-2);font-size:15px;background:var(--surface);border-radius:10px;overflow:hidden}
-.spec caption{text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--dim);padding-bottom:14px}
 .spec th{text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--dim);font-weight:500;padding:14px 18px;background:var(--band);border-bottom:1px solid var(--line-2)}
 .spec td{padding:15px 18px;border-bottom:1px solid var(--line);color:var(--ink-2);vertical-align:top}
 .spec tr:last-child td{border-bottom:0}
@@ -1323,14 +1322,8 @@ nav:not(.over) .nav-in{border-radius:0;background:transparent;box-shadow:none;pa
 /* la foto junto a la tabla es textura, no dato: va desenfocada */
 
 /* las tablas no se desbordan en celular */
-.spec{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
-.spec thead,.spec tbody,.spec tr{display:table;width:100%;table-layout:fixed}
-@media(max-width:680px){
-  .spec{white-space:normal}
-  .spec thead,.spec tbody,.spec tr{width:max-content;min-width:100%}
-  .spec th,.spec td{min-width:120px}
-  .spec td:first-child,.spec th:first-child{min-width:130px}
-}
+
+
 
 /* ------------------------------------------------------------
    Video de portada: enfriado hacia el índigo de la marca
@@ -1443,10 +1436,6 @@ nav.over{padding-top:12px}
 .mcard-v{min-height:64px}
 
 /* el epígrafe de la tabla ocupa el ancho completo y no se parte */
-.spec caption{
-  display:block;width:100%;box-sizing:border-box;
-  text-align:left;padding:0 0 14px;white-space:normal;
-}
 
 /* ------------------------------------------------------------
    Sección con foto de fondo desenfocada y la tabla a ancho completo
@@ -1554,3 +1543,63 @@ html,body{max-width:100%;overflow-x:hidden}
 /* viñetas con encabezado en negrita dentro de las tarjetas del recorrido */
 .fcard li b{color:var(--ink);font-weight:600;margin-right:2px}
 .fcard li{margin-bottom:3px}
+
+/* ============================================================
+   TABLAS — el contenedor se desplaza, la tabla queda íntegra
+   ============================================================ */
+.tabla-cap{
+  font-family:var(--mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--dim);margin:36px 0 14px;
+}
+.tabla-scroll{
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  border-radius:10px;
+}
+.spec{
+  display:table;width:100%;min-width:620px;margin:0;
+  border-collapse:collapse;border:1px solid var(--line-2);
+  background:var(--surface);font-size:15px;
+}
+.spec thead{display:table-header-group}
+.spec tbody{display:table-row-group}
+.spec tr{display:table-row}
+.spec th,.spec td{display:table-cell}
+@media(max-width:680px){
+  .spec{min-width:560px;font-size:14px}
+  .spec th,.spec td{padding:12px 13px}
+  .tabla-scroll{
+    -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 92%,transparent 100%);
+    mask-image:linear-gradient(90deg,#000 0%,#000 92%,transparent 100%);
+  }
+}
+
+/* ============================================================
+   CELULAR — correcciones de la auditoría renderizada
+   ============================================================ */
+@media(max-width:768px){
+  /* 1 · la entrada no deja el contenido borroso si se hace scroll rápido */
+  .motion .rv{
+    filter:none;transform:translateY(14px);
+    transition:opacity .38s ease-out,transform .38s cubic-bezier(.22,1,.36,1);
+  }
+  .motion .rv.in{transform:none}
+
+  /* 2 · la portada centra su contenido en vez de apoyarlo abajo */
+  .vhero-inner{justify-content:center;padding-bottom:34px}
+  .vhero .vhero-solo{max-width:100%}
+
+  /* 3 · los botones dejan de partirse en tres líneas */
+  .hero-cta,.vhero-cta{flex-direction:column;align-items:stretch;width:100%}
+  .hero-cta .btn,.hero-cta .vbtn,
+  .vhero-cta .btn,.vhero-cta .vbtn{width:100%;white-space:nowrap;padding-left:14px;padding-right:14px}
+
+  /* 4 · la píldora del hero acompaña el ancho */
+  .vhero-solo .vtag,.vhero .vtag{width:100%;justify-content:center;text-align:center;font-size:14.5px}
+}
+
+/* últimas zonas táctiles: marca, idioma y control deslizante */
+@media(max-width:1000px){
+  .brand{min-height:44px;display:flex;align-items:center}
+  .lang a{min-width:46px;justify-content:center}
+  input[type=range]{height:44px;padding:20px 0;box-sizing:content-box;margin:-20px 0}
+}

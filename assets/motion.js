@@ -51,7 +51,8 @@
       var i = 0;
       Array.prototype.forEach.call(g.children, function (c) {
         c.classList.add('rv');
-        c.style.transitionDelay = Math.min(i * 70, 420) + 'ms';
+        var chico = window.innerWidth < 768;
+        c.style.transitionDelay = Math.min(i * (chico ? 40 : 70), chico ? 200 : 420) + 'ms';
         i++;
       });
     });
