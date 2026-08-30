@@ -52,7 +52,7 @@
 
   var lang = document.documentElement.lang.indexOf('es') === 0 ? 'es' : 'en';
   var t = T[lang];
-  var TEL = '5491100000000';
+  var TEL = '5491125719820';
   var visto = false;
   try { visto = sessionStorage.getItem('vdn-promo') === '1'; } catch (e) {}
 

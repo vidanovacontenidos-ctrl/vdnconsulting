@@ -83,8 +83,12 @@
       required.forEach(function (id) {
         var el = document.getElementById(id);
         if (!el) return;
-        if (!el.value.trim()) { el.style.borderColor = 'var(--alert)'; ok = false; }
-        else { el.style.borderColor = ''; }
+        var v = el.value.trim();
+        var malo = !v;
+        if (!malo && el.type === 'email') malo = !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+        if (!malo && el.type === 'tel') malo = (v.replace(/\D/g, '').length < 8);
+        el.style.borderColor = malo ? 'var(--alert)' : '';
+        if (malo) ok = false;
       });
       if (!ok) return;
       /* Reemplazar por el envío real: fetch a Formspree, HubSpot o tu backend. */
@@ -269,5 +273,43 @@
   var t = null;
   window.addEventListener('resize', function () {
     clearTimeout(t); t = setTimeout(function () { build(); if (reduce) draw(); }, 180);
+  });
+})();
+
+/* ---- Menú desplegable en celular ---- */
+(function () {
+  'use strict';
+  var nav = document.querySelector('nav .nav-in');
+  var links = document.querySelector('.nav-links');
+  if (!nav || !links) return;
+
+  var b = document.createElement('button');
+  b.className = 'burger';
+  b.setAttribute('aria-label', 'Menú');
+  b.setAttribute('aria-expanded', 'false');
+  b.innerHTML = '<i></i><i></i><i></i>';
+
+  var drawer = document.createElement('div');
+  drawer.className = 'drawer';
+  drawer.innerHTML = links.innerHTML;
+
+  var cta = nav.querySelector('.btn');
+  if (cta) drawer.appendChild(cta.cloneNode(true));
+
+  var lang = nav.querySelector('.lang');
+  nav.insertBefore(b, lang || null);
+  nav.parentNode.appendChild(drawer);
+
+  b.addEventListener('click', function () {
+    var on = drawer.classList.toggle('on');
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-expanded', on);
+  });
+  drawer.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') {
+      drawer.classList.remove('on');
+      b.classList.remove('on');
+      b.setAttribute('aria-expanded', 'false');
+    }
   });
 })();

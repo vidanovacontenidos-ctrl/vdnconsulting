@@ -23,7 +23,7 @@
   --pri:#4A40D0;
   --pri-hi:#3A31B8;
   --on-pri:#FFFFFF;
-  --acc:#0D8F8A;
+  --acc:#0A7A75;
   --alert:#C2410C;
 
   /* --- alias heredados (no borrar: los usa el marcado existente) --- */
@@ -691,3 +691,251 @@ nav.over .brand .mk .s2{stroke:#5FD3CD}
   .chero-in{grid-template-columns:1fr}
   .chero::before{-webkit-mask-image:linear-gradient(180deg,transparent,#000 55%);mask-image:linear-gradient(180deg,transparent,#000 55%);opacity:.35}
 }
+
+/* ============================================================
+   U5 DISEÑAR — capítulo visual propio
+   ============================================================ */
+
+/* --- portada oscura --- */
+.dhero{
+  position:relative;overflow:hidden;color:#fff;
+  padding:76px 0 96px;
+  background:
+    radial-gradient(ellipse 70% 80% at 78% 20%, #3B2C9E 0%, transparent 62%),
+    radial-gradient(ellipse 60% 70% at 12% 92%, #0E5C58 0%, transparent 58%),
+    linear-gradient(160deg,#17123C 0%,#0A0818 100%);
+}
+.dhero::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 70% at 30% 10%,#000,transparent 72%);
+  mask-image:radial-gradient(ellipse 70% 70% at 30% 10%,#000,transparent 72%);
+}
+.dhero>.wrap{position:relative;z-index:3}
+.dhero h1{color:#fff;font-size:clamp(44px,7vw,86px);letter-spacing:-.045em;margin:20px 0 20px;font-variation-settings:'wdth' 104}
+.dhero h1 em{font-style:normal;background:linear-gradient(96deg,#A99BFF,#4FE3D8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.dhero .lede{color:rgba(255,255,255,.74)}
+.dhero .eyebrow{color:#8F84FF}
+.dhero .eyebrow::before{background:#8F84FF}
+.dhero .ubadge{background:rgba(255,255,255,.09);color:#C6BEFF;border:1px solid rgba(255,255,255,.16)}
+.dhero .btn-ghost{border-color:rgba(255,255,255,.28);color:#fff;background:transparent}
+.dhero .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08);color:#fff}
+.dhero .hero-fine{color:rgba(255,255,255,.5)}
+
+/* --- sección oscura reutilizable --- */
+.night{
+  position:relative;overflow:hidden;color:#fff;
+  background:linear-gradient(175deg,#141033 0%,#0B0920 62%,#120E2C 100%);
+}
+.night h2,.night h3{color:#fff}
+.night .lede,.night p{color:rgba(255,255,255,.72)}
+.night .eyebrow{color:#8F84FF}
+.night .eyebrow::before{background:#8F84FF}
+.night .quote-note{color:rgba(255,255,255,.5)}
+.night>.wrap{position:relative;z-index:2}
+
+/* --- selector de territorios --- */
+.terr-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:34px 0 26px}
+.tbt{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
+  padding:10px 17px;border-radius:100px;cursor:pointer;
+  border:1px solid rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.62);
+  transition:all .25s cubic-bezier(.22,.61,.36,1);
+}
+.tbt:hover{border-color:rgba(255,255,255,.45);color:#fff}
+.tbt.on{background:#fff;color:#12102C;border-color:#fff}
+
+.terr{
+  --t-bg:#F7F5FF;--t-ink:#16123A;--t-dim:#5B5780;--t-acc:#5B4BE8;--t-acc2:#0D8F8A;
+  --t-disp:'Instrument Serif',serif;--t-body:'Instrument Sans',sans-serif;
+  background:var(--t-bg);border-radius:20px;overflow:hidden;
+  box-shadow:0 40px 90px -40px rgba(0,0,0,.7);
+  transition:background .6s cubic-bezier(.22,.61,.36,1);
+  display:grid;grid-template-columns:1fr 300px;
+}
+.terr-main{padding:44px 44px 40px}
+.terr-kicker{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--t-acc);display:block;margin-bottom:18px;transition:color .5s ease;
+}
+.terr-disp{
+  font-family:var(--t-disp);color:var(--t-ink);
+  font-size:clamp(30px,4.4vw,54px);line-height:1.04;letter-spacing:-.03em;margin-bottom:18px;
+  transition:color .5s ease,font-family .01s;
+}
+.terr-copy{
+  font-family:var(--t-body);color:var(--t-dim);font-size:17px;line-height:1.62;max-width:46ch;
+  transition:color .5s ease;
+}
+.terr-tone{
+  margin-top:26px;padding-top:22px;border-top:1px solid color-mix(in srgb,var(--t-ink) 14%,transparent);
+  font-family:var(--t-body);color:var(--t-ink);font-size:15px;font-style:italic;
+}
+.terr-side{
+  padding:44px 32px;border-left:1px solid color-mix(in srgb,var(--t-ink) 10%,transparent);
+  display:flex;flex-direction:column;gap:26px;
+}
+.terr-sw{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.terr-sw i{height:46px;border-radius:8px;display:block;box-shadow:inset 0 0 0 1px rgba(0,0,0,.10);transition:background .6s cubic-bezier(.22,.61,.36,1)}
+.terr-meta{font-family:var(--mono);font-size:11px;line-height:2.1;color:var(--t-dim);transition:color .5s ease}
+.terr-meta b{color:var(--t-ink);font-weight:500;transition:color .5s ease}
+
+/* --- escala tipográfica --- */
+.scale{border-top:1px solid rgba(255,255,255,.13);margin-top:12px}
+.scale-row{
+  display:grid;grid-template-columns:150px 1fr;gap:26px;align-items:baseline;
+  padding:20px 0;border-bottom:1px solid rgba(255,255,255,.09);
+}
+.scale-row span{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+.scale-row p{color:#fff;line-height:1.06;letter-spacing:-.03em;margin:0}
+.s-1{font-family:var(--disp);font-variation-settings:'wdth' 104;font-weight:700;font-size:clamp(34px,5vw,62px)}
+.s-2{font-family:var(--disp);font-variation-settings:'wdth' 112;font-weight:700;font-size:clamp(24px,3vw,36px)}
+.s-3{font-family:var(--disp);font-variation-settings:'wdth' 118;font-weight:600;font-size:21px}
+.s-4{font-family:var(--body);font-weight:400;font-size:17px;line-height:1.6}
+.s-5{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+
+@media(max-width:900px){
+  .terr{grid-template-columns:1fr}
+  .terr-side{border-left:0;border-top:1px solid color-mix(in srgb,var(--t-ink) 10%,transparent);padding:28px 30px}
+  .terr-main{padding:32px 30px 28px}
+  .scale-row{grid-template-columns:1fr;gap:8px}
+}
+
+/* portada de U5 sin imagen: el texto respira a lo ancho */
+.uhero-solo{position:relative;z-index:3;max-width:920px}
+.dhero .uhero-solo .lede{font-size:19px;max-width:58ch}
+
+/* ============================================================
+   CORRECCIONES RESPONSIVE
+   ============================================================ */
+
+/* los hijos de una grilla no deben desbordar su columna */
+.compare>*,.caps>*,.cases>*,.syms>*,.plans>*,.steps>*,.calc>*,
+.cta-grid>*,.hero-grid>*,.uhero-grid>*,.unit>*{min-width:0}
+.col-a li,.col-b li,.cap li,.plan li,.checklist li{overflow-wrap:anywhere}
+
+/* menú desplegable en celular */
+.burger{
+  display:none;margin-left:auto;width:40px;height:40px;flex:none;
+  border:1px solid var(--line-2);background:var(--surface);border-radius:9px;
+  cursor:pointer;padding:0;position:relative;
+}
+.burger i{
+  position:absolute;left:11px;right:11px;height:1.5px;background:var(--ink);
+  border-radius:2px;transition:transform .25s ease,opacity .2s ease;
+}
+.burger i:nth-child(1){top:14px}
+.burger i:nth-child(2){top:19px}
+.burger i:nth-child(3){top:24px}
+.burger.on i:nth-child(1){transform:translateY(5px) rotate(45deg)}
+.burger.on i:nth-child(2){opacity:0}
+.burger.on i:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
+nav.over .burger{background:transparent;border-color:rgba(255,255,255,.3)}
+nav.over .burger i{background:#fff}
+
+.drawer{
+  display:none;border-top:1px solid var(--line);background:var(--surface);
+  padding:8px 24px 18px;
+}
+.drawer.on{display:block}
+.drawer a{
+  display:block;padding:14px 0;border-bottom:1px solid var(--line);
+  font-size:16px;color:var(--ink);
+}
+.drawer a:last-child{border-bottom:0}
+.drawer a.on{color:var(--pri);font-weight:500}
+.drawer .btn{width:100%;margin-top:14px}
+
+@media(max-width:1000px){
+  .burger{display:block}
+  .nav-in{gap:12px}
+  .brand{font-size:15.5px;white-space:nowrap}
+  .lang{order:3}
+  .lang a{padding:5px 9px;font-size:10.5px}
+  .nav .btn-sm{display:none}
+
+  /* comparación antes/después: una columna limpia */
+  .compare{grid-template-columns:1fr}
+  .arrow{
+    transform:none;padding:12px;font-size:17px;
+    border-left:0;border-right:0;
+    border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2);
+  }
+  .arrow::before{content:"↓"}
+  .arrow{font-size:0}
+  .arrow::before{font-size:19px}
+}
+@media(max-width:680px){
+  .brand{font-size:14.5px}
+  .brand .mk{width:19px;height:19px}
+}
+
+/* encuadre de la foto de cámaras: el sujeto está arriba */
+.fig-top img{object-position:center 22%}
+
+/* tarjetas dentro de una sección oscura */
+.night .cap{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.13)}
+.night .cap h3{color:#fff}
+.night .cap>span{color:#4FE3D8}
+.night .cap ul{color:rgba(255,255,255,.76)}
+.night .cap li::before{color:#8F84FF}
+.night figure{border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.05)}
+.night figure figcaption{background:linear-gradient(transparent,rgba(8,6,22,.88))}
+.night .checklist li{color:rgba(255,255,255,.76)}
+.night .checklist li::before{color:#4FE3D8}
+
+/* zonas de toque conformes a WCAG (mínimo 44x44) */
+@media(max-width:1000px){
+  .lang a{padding:12px 14px}
+  .btn-sm{padding:13px 20px}
+  .foot-col a{padding:6px 0;display:inline-block}
+  .q summary{padding:24px 0}
+}
+
+/* ------------------------------------------------------------
+   El especimen de territorio manda sobre los colores de .night.
+   Sin esto, un territorio de fondo claro queda con texto blanco.
+   ------------------------------------------------------------ */
+.night .terr .terr-kicker{color:var(--t-acc)}
+.night .terr .terr-disp{color:var(--t-ink)}
+.night .terr .terr-copy{color:var(--t-dim)}
+.night .terr .terr-tone{color:var(--t-ink)}
+.night .terr .terr-meta{color:var(--t-dim)}
+.night .terr .terr-meta b{color:var(--t-ink)}
+
+/* proporción 3:2, para fotos horizontales dentro de una columna de portada */
+.ratio-32{aspect-ratio:3/2}
+
+/* ------------------------------------------------------------
+   Portada de unidad con imagen de fondo difuminada al costado
+   ------------------------------------------------------------ */
+.uhero-img{position:relative;overflow:hidden}
+.uhero-img::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background-image:var(--foto);background-size:cover;background-position:center;
+  -webkit-mask-image:linear-gradient(90deg,transparent 6%,#000 44%,#000 100%);
+  mask-image:linear-gradient(90deg,transparent 6%,#000 44%,#000 100%);
+  opacity:.9;
+}
+.uhero-img::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg,var(--bg) 0%,var(--bg) 26%,rgba(248,248,252,.72) 46%,transparent 68%);
+}
+.uhero-img>.wrap{position:relative;z-index:3}
+@media(max-width:900px){
+  .uhero-img::before{-webkit-mask-image:linear-gradient(180deg,transparent 10%,#000 62%);mask-image:linear-gradient(180deg,transparent 10%,#000 62%);opacity:.28}
+  .uhero-img::after{background:linear-gradient(180deg,var(--bg) 0%,rgba(248,248,252,.85) 50%,transparent 100%)}
+}
+
+/* bloque de texto con imagen al costado, sin centrar ni dejar huecos */
+.par{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center;margin-top:34px}
+.par figure{margin:0}
+.par ul{margin:0}
+@media(max-width:900px){.par{grid-template-columns:1fr;gap:28px}}
+
+/* dentro de un bloque a dos columnas, las tarjetas van apiladas */
+.par .caps{grid-template-columns:1fr;margin-top:0}
+.par figure{align-self:stretch}
+.par figure img{height:100%}
